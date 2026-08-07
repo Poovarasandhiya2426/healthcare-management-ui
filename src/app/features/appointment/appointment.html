@@ -1,0 +1,114 @@
+<div class="container mt-4">
+
+    <app-add-appointment
+        [selectedAppointment]="selectedAppointment"
+        (appointmentAdded)="onAppointmentAdded()">
+    </app-add-appointment>
+
+    <h2 class="mb-4">
+
+        Appointment Management
+
+    </h2>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Specialization</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let appointment of appointments">
+
+                <td>{{ appointment.appointmentId }}</td>
+
+                <td>{{ appointment.patientName }}</td>
+
+                <td>{{ appointment.doctorName }}</td>
+
+                <td>{{ appointment.specialization }}</td>
+
+                <td>{{ appointment.appointmentDate }}</td>
+
+                <td>{{ appointment.appointmentTime }}</td>
+
+                <td>{{ appointment.reason }}</td>
+
+                <td>
+
+                    <span
+                        class="badge bg-success"
+                        *ngIf="appointment.status === 'BOOKED'">
+
+                        {{ appointment.status }}
+
+                    </span>
+
+                    <span
+                        class="badge bg-warning text-dark"
+                        *ngIf="appointment.status === 'PENDING'">
+
+                        {{ appointment.status }}
+
+                    </span>
+
+                    <span
+                        class="badge bg-danger"
+                        *ngIf="appointment.status === 'CANCELLED'">
+
+                        {{ appointment.status }}
+
+                    </span>
+
+                    <span
+                        class="badge bg-primary"
+                        *ngIf="appointment.status === 'COMPLETED'">
+
+                        {{ appointment.status }}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="btn btn-warning btn-sm me-2"
+                        (click)="editAppointment(appointment)">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="btn btn-danger btn-sm"
+                        (click)="deleteAppointment(appointment.appointmentId!)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

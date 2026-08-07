@@ -1,0 +1,113 @@
+<h2 class="mb-4">
+
+    Dashboard
+
+</h2>
+
+<div class="row mt-4">
+
+    <!-- Patients -->
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card text-bg-primary shadow">
+
+            <div class="card-body text-center">
+
+                <h3>
+
+                    {{ dashboard?.totalPatients ?? 0 }}
+
+                </h3>
+
+                <p class="mb-0">
+
+                    Total Patients
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Doctors -->
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card text-bg-success shadow">
+
+            <div class="card-body text-center">
+
+                <h3>
+
+                    {{ dashboard?.totalDoctors ?? 0 }}
+
+                </h3>
+
+                <p class="mb-0">
+
+                    Total Doctors
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Appointments -->
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card text-bg-warning shadow">
+
+            <div class="card-body text-center">
+
+                <h3>
+
+                    {{ dashboard?.totalAppointments ?? 0 }}
+
+                </h3>
+
+                <p class="mb-0">
+
+                    Total Appointments
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Revenue -->
+
+    <div class="col-md-3 mb-3">
+
+        <div class="card text-bg-danger shadow">
+
+            <div class="card-body text-center">
+
+                <h3>
+
+                    ₹{{ dashboard?.totalRevenue ?? 0 }}
+
+                </h3>
+
+                <p class="mb-0">
+
+                    Total Revenue
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

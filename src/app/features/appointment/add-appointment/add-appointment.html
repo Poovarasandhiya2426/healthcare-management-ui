@@ -1,0 +1,162 @@
+<div class="card mb-4">
+
+    <div class="card-header bg-primary text-white">
+
+        {{ isEditMode ? 'Update Appointment' : 'Book Appointment' }}
+
+    </div>
+
+    <div class="card-body">
+
+        <form
+            [formGroup]="appointmentForm"
+            (ngSubmit)="saveAppointment()">
+
+            <div class="row">
+
+                <!-- Patient -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">Patient</label>
+
+                    <select
+                        class="form-select"
+                        formControlName="patientId">
+
+                        <option [value]="0">
+                            Select Patient
+                        </option>
+
+                        <option
+                            *ngFor="let patient of patients"
+                            [value]="patient.patientId">
+
+                            {{ patient.firstName }}
+                            {{ patient.lastName }}
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Doctor -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">Doctor</label>
+
+                    <select
+                        class="form-select"
+                        formControlName="doctorId">
+
+                        <option [value]="0">
+                            Select Doctor
+                        </option>
+
+                        <option
+                            *ngFor="let doctor of doctors"
+                            [value]="doctor.doctorId">
+
+                            {{ doctor.doctorName }}
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Appointment Date -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">Appointment Date</label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        formControlName="appointmentDate">
+
+                </div>
+
+                <!-- Appointment Time -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">Appointment Time</label>
+
+                    <input
+                        type="time"
+                        class="form-control"
+                        formControlName="appointmentTime">
+
+                </div>
+
+                <!-- Status -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">Status</label>
+
+                    <select
+                        class="form-select"
+                        formControlName="status">
+
+                        <option value="BOOKED">
+                            BOOKED
+                        </option>
+
+                        <option value="COMPLETED">
+                            COMPLETED
+                        </option>
+
+                        <option value="CANCELLED">
+                            CANCELLED
+                        </option>
+
+                        <option value="PENDING">
+                            PENDING
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Reason -->
+
+                <div class="col-md-12 mb-3">
+
+                    <label class="form-label">Reason</label>
+
+                    <textarea
+                        rows="3"
+                        class="form-control"
+                        formControlName="reason"
+                        placeholder="Enter Reason"></textarea>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                {{ isEditMode ? 'Update Appointment' : 'Book Appointment' }}
+
+            </button>
+
+            <button
+                type="reset"
+                class="btn btn-secondary ms-2">
+
+                Clear
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,71 @@
+<div class="container mt-4">
+
+    <app-add-medical-record
+        [selectedRecord]="selectedRecord"
+        (recordAdded)="onRecordAdded()">
+    </app-add-medical-record>
+
+    <h2 class="mb-4">
+
+        Medical Record Management
+
+    </h2>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+                <th>Patient</th>
+                <th>Diagnosis</th>
+                <th>Treatment</th>
+                <th>Allergies</th>
+                <th>Medical History</th>
+                <th>Record Date</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let record of records">
+
+                <td>{{ record.recordId }}</td>
+                <td>{{ record.patientName }}</td>
+                <td>{{ record.diagnosis }}</td>
+                <td>{{ record.treatment }}</td>
+                <td>{{ record.allergies }}</td>
+                <td>{{ record.medicalHistory }}</td>
+                <td>{{ record.recordDate }}</td>
+
+                <td>
+
+                    <button
+                        class="btn btn-warning btn-sm me-2"
+                        (click)="editRecord(record)">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="btn btn-danger btn-sm"
+                        (click)="deleteRecord(record.recordId!)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

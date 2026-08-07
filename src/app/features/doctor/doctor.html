@@ -1,0 +1,86 @@
+<div class="container mt-4">
+
+    <app-add-doctor
+        [selectedDoctor]="selectedDoctor"
+        (doctorAdded)="onDoctorAdded()">
+    </app-add-doctor>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>
+
+        Doctor Management
+
+    </h2>
+
+    <input
+        type="text"
+        class="form-control w-25"
+        placeholder="Search Doctor..."
+        [(ngModel)]="searchKeyword"
+        (keyup)="searchDoctors()">
+
+</div>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+                <th>Doctor Name</th>
+                <th>Specialization</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Experience</th>
+                <th>Consultation Fee</th>
+                <th>Qualification</th>
+                <th>Hospital</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let doctor of doctors">
+
+                <td>{{ doctor.doctorId }}</td>
+                <td>{{ doctor.doctorName }}</td>
+                <td>{{ doctor.specialization }}</td>
+                <td>{{ doctor.email }}</td>
+                <td>{{ doctor.mobileNumber }}</td>
+                <td>{{ doctor.experience }}</td>
+                <td>{{ doctor.consultationFee }}</td>
+                <td>{{ doctor.qualification }}</td>
+                <td>{{ doctor.hospitalName }}</td>
+
+                <td>
+
+                    <button
+                        class="btn btn-warning btn-sm me-2"
+                        (click)="editDoctor(doctor)">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="btn btn-danger btn-sm"
+                        (click)="deleteDoctor(doctor.doctorId!)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

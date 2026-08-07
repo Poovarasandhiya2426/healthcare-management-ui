@@ -1,0 +1,71 @@
+<div class="container mt-4">
+
+    <app-add-prescription
+        [selectedPrescription]="selectedPrescription"
+        (prescriptionAdded)="onPrescriptionAdded()">
+    </app-add-prescription>
+
+    <h2 class="mb-4">
+        Prescription Management
+    </h2>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Medicine</th>
+                <th>Dosage</th>
+                <th>Frequency</th>
+                <th>Duration</th>
+                <th>Date</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let prescription of prescriptions">
+
+                <td>{{ prescription.prescriptionId }}</td>
+                <td>{{ prescription.patientName }}</td>
+                <td>{{ prescription.doctorName }}</td>
+                <td>{{ prescription.medicineName }}</td>
+                <td>{{ prescription.dosage }}</td>
+                <td>{{ prescription.frequency }}</td>
+                <td>{{ prescription.durationInDays }} Days</td>
+                <td>{{ prescription.prescriptionDate }}</td>
+
+                <td>
+
+                    <button
+                        class="btn btn-warning btn-sm me-2"
+                        (click)="editPrescription(prescription)">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="btn btn-danger btn-sm"
+                        (click)="deletePrescription(prescription.prescriptionId!)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

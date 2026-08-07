@@ -1,0 +1,86 @@
+<div class="container mt-4">
+
+    <app-add-billing
+        [selectedBilling]="selectedBilling"
+        (billingAdded)="onBillingAdded()">
+    </app-add-billing>
+
+    <h2 class="mb-4">
+
+        Billing Management
+
+    </h2>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+                <th>Patient</th>
+                <th>Consultation</th>
+                <th>Medicine</th>
+                <th>Lab</th>
+                <th>Other</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Method</th>
+                <th>Date</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let billing of billings">
+
+                <td>{{ billing.billId }}</td>
+
+                <td>{{ billing.patientName }}</td>
+
+                <td>{{ billing.consultationFee }}</td>
+
+                <td>{{ billing.medicineCharge }}</td>
+
+                <td>{{ billing.labCharge }}</td>
+
+                <td>{{ billing.otherCharge }}</td>
+
+                <td>{{ billing.totalAmount }}</td>
+
+                <td>{{ billing.paymentStatus }}</td>
+
+                <td>{{ billing.paymentMethod }}</td>
+
+                <td>{{ billing.billDate }}</td>
+
+                <td>
+
+                    <button
+                        class="btn btn-warning btn-sm me-2"
+                        (click)="editBilling(billing)">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="btn btn-danger btn-sm"
+                        (click)="deleteBilling(billing.billId!)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

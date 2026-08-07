@@ -1,0 +1,167 @@
+<div class="card mb-4">
+
+    <div class="card-header bg-primary text-white">
+
+        {{ isEditMode ? 'Update Prescription' : 'Add Prescription' }}
+
+    </div>
+
+    <div class="card-body">
+
+        <form
+            [formGroup]="prescriptionForm"
+            (ngSubmit)="savePrescription()">
+
+            <div class="row">
+
+                <!-- Appointment -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Appointment
+                    </label>
+
+                    <select
+                        class="form-select"
+                        formControlName="appointmentId">
+
+                        <option [value]="0">
+
+                            Select Appointment
+
+                        </option>
+
+                        <option
+                            *ngFor="let appointment of appointments"
+                            [value]="appointment.appointmentId">
+
+                            {{ appointment.patientName }}
+                            -
+                            {{ appointment.doctorName }}
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Medicine -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+                        Medicine Name
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="medicineName"
+                        placeholder="Medicine Name">
+
+                </div>
+
+                <!-- Dosage -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Dosage
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="dosage"
+                        placeholder="1 Tablet">
+
+                </div>
+
+                <!-- Frequency -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Frequency
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="frequency"
+                        placeholder="Twice a Day">
+
+                </div>
+
+                <!-- Duration -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Duration (Days)
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        formControlName="durationInDays">
+
+                </div>
+
+                <!-- Instructions -->
+
+                <div class="col-md-12 mb-3">
+
+                    <label class="form-label">
+                        Instructions
+                    </label>
+
+                    <textarea
+                        rows="3"
+                        class="form-control"
+                        formControlName="instructions"
+                        placeholder="Take after food">
+
+                    </textarea>
+
+                </div>
+
+                <!-- Prescription Date -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Prescription Date
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        formControlName="prescriptionDate">
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                {{ isEditMode ? 'Update Prescription' : 'Save Prescription' }}
+
+            </button>
+
+            <button
+                type="reset"
+                class="btn btn-secondary ms-2">
+
+                Clear
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

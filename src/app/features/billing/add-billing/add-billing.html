@@ -1,0 +1,186 @@
+<div class="card mb-4">
+
+    <div class="card-header bg-primary text-white">
+
+        {{ isEditMode ? 'Update Billing' : 'Add Billing' }}
+
+    </div>
+
+    <div class="card-body">
+
+        <form
+            [formGroup]="billingForm"
+            (ngSubmit)="saveBilling()">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Patient
+
+                    </label>
+
+                    <select
+                        class="form-select"
+                        formControlName="patientId">
+
+                        <option [value]="0">
+
+                            Select Patient
+
+                        </option>
+
+                        <option
+                            *ngFor="let patient of patients"
+                            [value]="patient.patientId">
+
+                            {{ patient.firstName }}
+                            {{ patient.lastName }}
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">
+
+                        Consultation Fee
+
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        formControlName="consultationFee">
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">
+
+                        Medicine Charge
+
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        formControlName="medicineCharge">
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">
+
+                        Lab Charge
+
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        formControlName="labCharge">
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">
+
+                        Other Charge
+
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        formControlName="otherCharge">
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">
+
+                        Payment Status
+
+                    </label>
+
+                    <select
+                        class="form-select"
+                        formControlName="paymentStatus">
+
+                        <option value="">Select</option>
+                        <option>PAID</option>
+                        <option>PENDING</option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label class="form-label">
+
+                        Payment Method
+
+                    </label>
+
+                    <select
+                        class="form-select"
+                        formControlName="paymentMethod">
+
+                        <option value="">Select</option>
+                        <option>Cash</option>
+                        <option>UPI</option>
+                        <option>Card</option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+
+                        Bill Date
+
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        formControlName="billDate">
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                {{ isEditMode ? 'Update Billing' : 'Save Billing' }}
+
+            </button>
+
+            <button
+                type="reset"
+                class="btn btn-secondary ms-2">
+
+                Clear
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

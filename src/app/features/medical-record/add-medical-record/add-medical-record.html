@@ -1,0 +1,163 @@
+<div class="card mb-4">
+
+    <div class="card-header bg-primary text-white">
+
+        {{ isEditMode ? 'Update Medical Record' : 'Add Medical Record' }}
+
+    </div>
+
+    <div class="card-body">
+
+        <form
+            [formGroup]="medicalRecordForm"
+            (ngSubmit)="saveMedicalRecord()">
+
+            <div class="row">
+
+                <!-- Patient -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Patient
+
+                    </label>
+
+                    <select
+                        class="form-select"
+                        formControlName="patientId">
+
+                        <option [value]="0">
+
+                            Select Patient
+
+                        </option>
+
+                        <option
+                            *ngFor="let patient of patients"
+                            [value]="patient.patientId">
+
+                            {{ patient.firstName }}
+                            {{ patient.lastName }}
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Record Date -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Record Date
+
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        formControlName="recordDate">
+
+                </div>
+
+                <!-- Diagnosis -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Diagnosis
+
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="diagnosis"
+                        placeholder="Enter Diagnosis">
+
+                </div>
+
+                <!-- Treatment -->
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Treatment
+
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="treatment"
+                        placeholder="Enter Treatment">
+
+                </div>
+
+                <!-- Allergies -->
+
+                <div class="col-md-12 mb-3">
+
+                    <label class="form-label">
+
+                        Allergies
+
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="allergies"
+                        placeholder="Enter Allergies">
+
+                </div>
+
+                <!-- Medical History -->
+
+                <div class="col-md-12 mb-3">
+
+                    <label class="form-label">
+
+                        Medical History
+
+                    </label>
+
+                    <textarea
+                        rows="4"
+                        class="form-control"
+                        formControlName="medicalHistory"
+                        placeholder="Enter Medical History">
+
+                    </textarea>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                {{ isEditMode ? 'Update Medical Record' : 'Save Medical Record' }}
+
+            </button>
+
+            <button
+                type="reset"
+                class="btn btn-secondary ms-2">
+
+                Clear
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

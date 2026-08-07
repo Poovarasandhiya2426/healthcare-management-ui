@@ -1,0 +1,153 @@
+<div class="container mt-4">
+
+    <app-add-patient
+        [selectedPatient]="selectedPatient"
+        (patientAdded)="onPatientAdded()">
+    </app-add-patient>
+
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+
+        <h2>
+
+            Patient Management
+
+        </h2>
+
+        <input
+            type="text"
+            class="form-control w-25"
+            placeholder="Search Patient..."
+            [(ngModel)]="searchKeyword"
+            (keyup)="searchPatients()">
+
+    </div>
+
+    <table class="table table-bordered table-striped table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Blood Group</th>
+                <th width="180">Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let patient of patients">
+
+                <td>{{ patient.patientId }}</td>
+                <td>{{ patient.firstName }}</td>
+                <td>{{ patient.lastName }}</td>
+                <td>{{ patient.age }}</td>
+                <td>{{ patient.gender }}</td>
+                <td>{{ patient.mobileNumber }}</td>
+                <td>{{ patient.email }}</td>
+                <td>{{ patient.bloodGroup }}</td>
+
+                <td>
+
+                    <button
+                        type="button"
+                        class="btn btn-warning btn-sm me-2"
+                        (click)="editPatient(patient)">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        (click)="deletePatient(patient.patientId!)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <tr *ngIf="patients.length === 0">
+
+                <td colspan="9" class="text-center text-muted">
+
+                    No Patients Found
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <div
+        class="d-flex justify-content-between align-items-center mt-3">
+
+        <div>
+
+            Showing
+
+            <strong>
+
+                {{ patients.length }}
+
+            </strong>
+
+            of
+
+            <strong>
+
+                {{ totalElements }}
+
+            </strong>
+
+            Patients
+
+        </div>
+
+        <div>
+
+           <button
+    type="button"
+    class="btn btn-outline-primary me-2"
+    (click)="previousPage()"
+    [disabled]="currentPage <= 0">
+
+    ← Previous
+
+</button>
+
+            <span class="fw-bold">
+
+                Page {{ currentPage + 1 }} of {{ totalPages }}
+
+            </span>
+
+            <button
+    type="button"
+    class="btn btn-outline-primary ms-2"
+    (click)="nextPage()"
+    [disabled]="currentPage >= totalPages - 1">
+
+    Next →
+
+</button>
+
+        </div>
+
+    </div>
+
+</div>

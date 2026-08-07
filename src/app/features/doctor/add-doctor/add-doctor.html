@@ -1,0 +1,133 @@
+<div class="card mb-4">
+
+    <div class="card-header bg-primary text-white">
+
+        {{ isEditMode ? 'Update Doctor' : 'Add Doctor' }}
+
+    </div>
+
+    <div class="card-body">
+
+        <form
+            [formGroup]="doctorForm"
+            (ngSubmit)="saveDoctor()">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">Doctor Name</label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="doctorName"
+                        placeholder="Enter Doctor Name">
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">Specialization</label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="specialization"
+                        placeholder="Enter Specialization">
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">Email</label>
+
+                    <input
+                        type="email"
+                        class="form-control"
+                        formControlName="email"
+                        placeholder="Enter Email">
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">Mobile Number</label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="mobileNumber"
+                        placeholder="Enter Mobile Number">
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">Experience (Years)</label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        formControlName="experience">
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">Consultation Fee</label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        formControlName="consultationFee">
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">Qualification</label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="qualification"
+                        placeholder="MBBS, MD">
+
+                </div>
+
+                <div class="col-md-12 mb-3">
+
+                    <label class="form-label">Hospital Name</label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="hospitalName"
+                        placeholder="Enter Hospital Name">
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                {{ isEditMode ? 'Update Doctor' : 'Save Doctor' }}
+
+            </button>
+
+            <button
+                type="reset"
+                class="btn btn-secondary ms-2">
+
+                Clear
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
