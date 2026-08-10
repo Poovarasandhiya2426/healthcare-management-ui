@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import * as XLSX from 'xlsx';
+
 import { Patient } from '../../models/patient';
 import { PatientService } from '../../core/services/patient.service';
 import { AddPatientComponent } from './add-patient/add-patient';
@@ -43,57 +45,57 @@ export class PatientComponent implements OnInit {
 
   }
 
- loadPatientPage(page: number): void {
+  loadPatientPage(page: number): void {
 
-  this.patientService
-    .getPatientsWithPagination(page, this.pageSize)
-    .subscribe({
+    this.patientService
+      .getPatientsWithPagination(page, this.pageSize)
+      .subscribe({
 
-      next: (response) => {
+        next: (response) => {
 
-        this.patients = response.data.content;
+          this.patients = response.data.content;
 
-        this.currentPage = response.data.number;
+          this.currentPage = response.data.number;
 
-        this.totalPages = response.data.totalPages;
+          this.totalPages = response.data.totalPages;
 
-        this.totalElements = response.data.totalElements;
+          this.totalElements = response.data.totalElements;
 
-      },
+        },
 
-      error: (err) => {
+        error: (err) => {
 
-        console.error(err);
+          console.error(err);
 
-      }
+        }
 
-    });
+      });
 
-}
-
- nextPage(): void {
-
-  if (this.currentPage >= this.totalPages - 1) {
-    return;
   }
 
-  const page = this.currentPage + 1;
+  nextPage(): void {
 
-  this.loadPatientPage(page);
+    if (this.currentPage >= this.totalPages - 1) {
+      return;
+    }
 
-}
+    const page = this.currentPage + 1;
+
+    this.loadPatientPage(page);
+
+  }
 
   previousPage(): void {
 
-  if (this.currentPage <= 0) {
-    return;
+    if (this.currentPage <= 0) {
+      return;
+    }
+
+    const page = this.currentPage - 1;
+
+    this.loadPatientPage(page);
+
   }
-
-  const page = this.currentPage - 1;
-
-  this.loadPatientPage(page);
-
-}
 
   searchPatients(): void {
 
@@ -184,6 +186,63 @@ export class PatientComponent implements OnInit {
     this.selectedPatient = undefined;
 
     this.loadPatientPage(this.currentPage);
+
+  }
+
+  // ==========================================
+  // EXPORT PATIENTS TO EXCEL
+  // ==========================================
+
+  exportPatientsToExcel(): void {
+
+    if (this.patients.length === 0) {
+
+      alert('No patient data available to export.');
+
+      return;
+
+    }
+
+    const excelData = this.patients.map(patient => ({
+
+      'Patient ID': patient.patientId,
+
+      'First Name': patient.firstName,
+
+      'Last Name': patient.lastName,
+
+      'Age': patient.age,
+
+      'Gender': patient.gender,
+
+      'Mobile Number': patient.mobileNumber,
+
+      'Email': patient.email,
+
+      'Blood Group': patient.bloodGroup,
+
+      'Date of Birth': patient.dateOfBirth,
+
+      'Address': patient.address
+
+    }));
+
+    const worksheet: XLSX.WorkSheet =
+      XLSX.utils.json_to_sheet(excelData);
+
+    const workbook: XLSX.WorkBook =
+      XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(
+      workbook,
+      worksheet,
+      'Patients'
+    );
+
+    XLSX.writeFile(
+      workbook,
+      'patients.xlsx'
+    );
 
   }
 

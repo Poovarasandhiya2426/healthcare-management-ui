@@ -1,152 +1,206 @@
-<div class="container mt-4">
+<app-add-patient
+    [selectedPatient]="selectedPatient"
+    (patientAdded)="onPatientAdded()">
+</app-add-patient>
 
-    <app-add-patient
-        [selectedPatient]="selectedPatient"
-        (patientAdded)="onPatientAdded()">
-    </app-add-patient>
 
-    <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+<div class="d-flex justify-content-between align-items-center mt-4 mb-3">
 
-        <h2>
+    <h2>
 
-            Patient Management
+        Patient Management
 
-        </h2>
+    </h2>
+
+
+    <div class="d-flex align-items-center">
 
         <input
             type="text"
-            class="form-control w-25"
+            class="form-control"
+            style="width: 250px;"
             placeholder="Search Patient..."
             [(ngModel)]="searchKeyword"
             (keyup)="searchPatients()">
 
+
+        <button
+            type="button"
+            class="btn btn-success ms-2"
+            (click)="exportPatientsToExcel()">
+
+            Export Excel
+
+        </button>
+
     </div>
 
-    <table class="table table-bordered table-striped table-hover">
+</div>
 
-        <thead class="table-dark">
 
-            <tr>
+<table class="table table-bordered table-striped table-hover">
 
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Mobile</th>
-                <th>Email</th>
-                <th>Blood Group</th>
-                <th width="180">Action</th>
+    <thead class="table-dark">
 
-            </tr>
+        <tr>
 
-        </thead>
+            <th>ID</th>
 
-        <tbody>
+            <th>First Name</th>
 
-            <tr *ngFor="let patient of patients">
+            <th>Last Name</th>
 
-                <td>{{ patient.patientId }}</td>
-                <td>{{ patient.firstName }}</td>
-                <td>{{ patient.lastName }}</td>
-                <td>{{ patient.age }}</td>
-                <td>{{ patient.gender }}</td>
-                <td>{{ patient.mobileNumber }}</td>
-                <td>{{ patient.email }}</td>
-                <td>{{ patient.bloodGroup }}</td>
+            <th>Age</th>
 
-                <td>
+            <th>Gender</th>
 
-                    <button
-                        type="button"
-                        class="btn btn-warning btn-sm me-2"
-                        (click)="editPatient(patient)">
+            <th>Mobile</th>
 
-                        Edit
+            <th>Email</th>
 
-                    </button>
+            <th>Blood Group</th>
 
-                    <button
-                        type="button"
-                        class="btn btn-danger btn-sm"
-                        (click)="deletePatient(patient.patientId!)">
+            <th width="180">Action</th>
 
-                        Delete
+        </tr>
 
-                    </button>
+    </thead>
 
-                </td>
 
-            </tr>
+    <tbody>
 
-            <tr *ngIf="patients.length === 0">
+        <tr *ngFor="let patient of patients">
 
-                <td colspan="9" class="text-center text-muted">
+            <td>
+                {{ patient.patientId }}
+            </td>
 
-                    No Patients Found
+            <td>
+                {{ patient.firstName }}
+            </td>
 
-                </td>
+            <td>
+                {{ patient.lastName }}
+            </td>
 
-            </tr>
+            <td>
+                {{ patient.age }}
+            </td>
 
-        </tbody>
+            <td>
+                {{ patient.gender }}
+            </td>
 
-    </table>
+            <td>
+                {{ patient.mobileNumber }}
+            </td>
 
-    <div
-        class="d-flex justify-content-between align-items-center mt-3">
+            <td>
+                {{ patient.email }}
+            </td>
 
-        <div>
+            <td>
+                {{ patient.bloodGroup }}
+            </td>
 
-            Showing
 
-            <strong>
+            <td>
 
-                {{ patients.length }}
+                <button
+                    type="button"
+                    class="btn btn-warning btn-sm me-2"
+                    (click)="editPatient(patient)">
 
-            </strong>
+                    Edit
 
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    (click)="deletePatient(patient.patientId!)">
+
+                    Delete
+
+                </button>
+
+            </td>
+
+        </tr>
+
+
+        <tr *ngIf="patients.length === 0">
+
+            <td
+                colspan="9"
+                class="text-center text-muted">
+
+                No Patients Found
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+
+<div
+    class="d-flex justify-content-between align-items-center mt-3">
+
+
+    <div>
+
+        Showing
+
+        <strong>
+            {{ patients.length }}
+        </strong>
+
+        of
+
+        <strong>
+            {{ totalElements }}
+        </strong>
+
+        Patients
+
+    </div>
+
+
+    <div>
+
+        <button
+            type="button"
+            class="btn btn-outline-primary me-2"
+            (click)="previousPage()"
+            [disabled]="currentPage <= 0">
+
+            ← Previous
+
+        </button>
+
+
+        <span class="fw-bold">
+
+            Page {{ currentPage + 1 }}
             of
+            {{ totalPages }}
 
-            <strong>
+        </span>
 
-                {{ totalElements }}
 
-            </strong>
+        <button
+            type="button"
+            class="btn btn-outline-primary ms-2"
+            (click)="nextPage()"
+            [disabled]="currentPage >= totalPages - 1">
 
-            Patients
+            Next →
 
-        </div>
-
-        <div>
-
-           <button
-    type="button"
-    class="btn btn-outline-primary me-2"
-    (click)="previousPage()"
-    [disabled]="currentPage <= 0">
-
-    ← Previous
-
-</button>
-
-            <span class="fw-bold">
-
-                Page {{ currentPage + 1 }} of {{ totalPages }}
-
-            </span>
-
-            <button
-    type="button"
-    class="btn btn-outline-primary ms-2"
-    (click)="nextPage()"
-    [disabled]="currentPage >= totalPages - 1">
-
-    Next →
-
-</button>
-
-        </div>
+        </button>
 
     </div>
 
