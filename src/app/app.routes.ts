@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 
 import { MainLayoutComponent } from './core/layout/main-layout/main-layout';
 
+import { LoginComponent } from './features/auth/login/login';
+
 import { DashboardComponent } from './features/dashboard/dashboard';
 import { PatientComponent } from './features/patient/patient';
 import { DoctorComponent } from './features/doctor/doctor';
@@ -12,6 +14,13 @@ import { BillingComponent } from './features/billing/billing';
 
 export const routes: Routes = [
 
+  // Login Page
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+
+  // Main Application
   {
     path: '',
     component: MainLayoutComponent,

@@ -1,0 +1,82 @@
+<div class="login-page">
+
+    <div class="login-card">
+
+        <div class="login-header">
+
+            <h2>Healthcare Management System</h2>
+
+            <p>Login to your account</p>
+
+        </div>
+
+
+        <form (ngSubmit)="login()">
+
+            <!-- Username -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    id="username"
+                    type="text"
+                    class="form-control"
+                    name="username"
+                    [(ngModel)]="username"
+                    placeholder="Enter username"
+                    autocomplete="username">
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    [(ngModel)]="password"
+                    placeholder="Enter password"
+                    autocomplete="current-password">
+
+            </div>
+
+
+            <!-- Error Message -->
+
+            <div
+                *ngIf="errorMessage"
+                class="error-message">
+
+                {{ errorMessage }}
+
+            </div>
+
+
+            <!-- Login Button -->
+
+            <button
+                type="submit"
+                class="login-button"
+                [disabled]="isLoading">
+
+                {{ isLoading ? 'Logging in...' : 'Login' }}
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
