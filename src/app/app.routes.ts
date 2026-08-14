@@ -12,18 +12,22 @@ import { PrescriptionComponent } from './features/prescription/prescription';
 import { MedicalRecordComponent } from './features/medical-record/medical-record';
 import { BillingComponent } from './features/billing/billing';
 
+import { authGuard } from './core/guards/auth.guard';
+
 export const routes: Routes = [
 
-  // Login Page
+  // Login Page - Public
   {
     path: 'login',
     component: LoginComponent
   },
 
-  // Main Application
+  // Main Application - Protected
   {
     path: '',
     component: MainLayoutComponent,
+    canActivate: [authGuard],
+
     children: [
 
       {

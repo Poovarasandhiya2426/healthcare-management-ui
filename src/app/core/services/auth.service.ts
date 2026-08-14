@@ -35,20 +35,23 @@ export class AuthService {
 
         tap((response) => {
 
-          localStorage.setItem(
-            'token',
-            response.token
-          );
+          if (typeof localStorage !== 'undefined') {
 
-          localStorage.setItem(
-            'username',
-            response.username
-          );
+            localStorage.setItem(
+              'token',
+              response.token
+            );
 
-          localStorage.setItem(
-            'role',
-            response.role
-          );
+            localStorage.setItem(
+              'username',
+              response.username
+            );
+
+            localStorage.setItem(
+              'role',
+              response.role
+            );
+          }
 
         })
 
@@ -56,6 +59,10 @@ export class AuthService {
   }
 
   getToken(): string | null {
+
+    if (typeof localStorage === 'undefined') {
+      return null;
+    }
 
     return localStorage.getItem('token');
   }
@@ -66,6 +73,10 @@ export class AuthService {
   }
 
   logout(): void {
+
+    if (typeof localStorage === 'undefined') {
+      return;
+    }
 
     localStorage.removeItem('token');
 
