@@ -24,6 +24,9 @@ export class AuthService {
     private http: HttpClient
   ) {}
 
+  // =========================
+  // LOGIN
+  // =========================
   login(request: LoginRequest): Observable<LoginResponse> {
 
     return this.http
@@ -35,22 +38,23 @@ export class AuthService {
 
         tap((response) => {
 
-          if (typeof localStorage !== 'undefined') {
+          if (typeof window !== 'undefined') {
 
-            localStorage.setItem(
+            window.localStorage.setItem(
               'token',
               response.token
             );
 
-            localStorage.setItem(
+            window.localStorage.setItem(
               'username',
               response.username
             );
 
-            localStorage.setItem(
+            window.localStorage.setItem(
               'role',
               response.role
             );
+
           }
 
         })
@@ -58,30 +62,49 @@ export class AuthService {
       );
   }
 
+
+  // =========================
+  // GET TOKEN
+  // =========================
   getToken(): string | null {
 
-    if (typeof localStorage === 'undefined') {
+    if (typeof window === 'undefined') {
       return null;
     }
 
-    return localStorage.getItem('token');
+    return window.localStorage.getItem('token');
   }
 
+
+  // =========================
+  // CHECK LOGIN STATUS
+  // =========================
   isLoggedIn(): boolean {
 
-    return !!this.getToken();
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    const token = window.localStorage.getItem('token');
+
+    return token !== null && token.trim().length > 0;
   }
 
+
+  // =========================
+  // LOGOUT
+  // =========================
   logout(): void {
 
-    if (typeof localStorage === 'undefined') {
+    if (typeof window === 'undefined') {
       return;
     }
 
-    localStorage.removeItem('token');
+    window.localStorage.removeItem('token');
 
-    localStorage.removeItem('username');
+    window.localStorage.removeItem('username');
 
-    localStorage.removeItem('role');
+    window.localStorage.removeItem('role');
   }
+
 }

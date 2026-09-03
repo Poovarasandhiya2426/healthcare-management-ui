@@ -1,44 +1,292 @@
-<div class="container-fluid">
+<div class="dashboard-page">
 
-    <!-- Dashboard Title -->
+    <!-- =========================================
+         HERO SECTION
+         ========================================= -->
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <section class="hero-section">
+
+        <div class="hero-content">
+
+            <div class="hero-text">
+
+                <span class="hero-tag">
+                    🏥 HEALTHCARE MANAGEMENT SYSTEM
+                </span>
+
+                <h1>
+                    Smart Healthcare.
+                    <br>
+                    <span>Better Patient Care.</span>
+                </h1>
+
+                <p>
+                    Manage patients, doctors, appointments and
+                    healthcare operations from one powerful platform.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button class="hero-btn primary-btn">
+                        📊 View Dashboard
+                    </button>
+
+                    <button class="hero-btn secondary-btn">
+                        👥 Manage Patients
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Medical Illustration -->
+
+            <div class="hero-visual">
+
+                <div class="medical-circle circle-one"></div>
+                <div class="medical-circle circle-two"></div>
+
+                <div class="doctor-illustration">
+
+                    <div class="doctor-icon">
+                        👨‍⚕️
+                    </div>
+
+                    <div class="medical-cross">
+                        +
+                    </div>
+
+                </div>
+
+                <div class="floating-card card-one">
+                    ❤️
+                    <span>Patient Care</span>
+                </div>
+
+                <div class="floating-card card-two">
+                    🩺
+                    <span>Healthcare</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         WELCOME BAR
+         ========================================= -->
+
+    <section class="welcome-section">
 
         <div>
 
-            <h2 class="mb-1">
-                Dashboard
+            <span class="welcome-small">
+                WELCOME TO YOUR DASHBOARD
+            </span>
+
+            <h2>
+                Healthcare Overview
             </h2>
 
-            <p class="text-muted mb-0">
-                Healthcare Management Overview
+            <p>
+                Monitor your hospital activities and performance
+                in real time.
             </p>
 
         </div>
 
-    </div>
+        <div class="welcome-icon">
+            🏥
+        </div>
+
+    </section>
 
 
-    <!-- Summary Cards -->
+    <!-- =========================================
+         STATISTICS
+         ========================================= -->
 
-    <div class="row">
+    <section class="statistics-section">
+
+        <div class="section-heading">
+
+            <div>
+                <span>OVERVIEW</span>
+                <h2>Hospital Statistics</h2>
+            </div>
+
+            <p>
+                Current healthcare statistics
+            </p>
+
+        </div>
 
 
-        <!-- Patients -->
+        <div class="row g-4">
 
-        <div class="col-md-3 mb-4">
 
-            <div class="card text-bg-primary shadow h-100">
+            <!-- PATIENTS -->
 
-                <div class="card-body text-center">
+            <div class="col-xl-3 col-lg-6 col-md-6">
 
-                    <h3>
-                        {{ dashboard?.totalPatients ?? 0 }}
-                    </h3>
+                <div class="stat-card patients-card">
 
-                    <p class="mb-0">
-                        Total Patients
-                    </p>
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            👥
+                        </div>
+
+                        <span class="stat-badge">
+                            ACTIVE
+                        </span>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Patients
+                        </span>
+
+                        <h3>
+                            {{ dashboard?.totalPatients ?? 0 }}
+                        </h3>
+
+                        <p>
+                            Registered patients
+                        </p>
+
+                    </div>
+
+                    <div class="stat-decoration"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DOCTORS -->
+
+            <div class="col-xl-3 col-lg-6 col-md-6">
+
+                <div class="stat-card doctors-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            👨‍⚕️
+                        </div>
+
+                        <span class="stat-badge">
+                            STAFF
+                        </span>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Doctors
+                        </span>
+
+                        <h3>
+                            {{ dashboard?.totalDoctors ?? 0 }}
+                        </h3>
+
+                        <p>
+                            Healthcare professionals
+                        </p>
+
+                    </div>
+
+                    <div class="stat-decoration"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- APPOINTMENTS -->
+
+            <div class="col-xl-3 col-lg-6 col-md-6">
+
+                <div class="stat-card appointments-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            📅
+                        </div>
+
+                        <span class="stat-badge">
+                            TODAY
+                        </span>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Appointments
+                        </span>
+
+                        <h3>
+                            {{ dashboard?.totalAppointments ?? 0 }}
+                        </h3>
+
+                        <p>
+                            Scheduled appointments
+                        </p>
+
+                    </div>
+
+                    <div class="stat-decoration"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- REVENUE -->
+
+            <div class="col-xl-3 col-lg-6 col-md-6">
+
+                <div class="stat-card revenue-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            💰
+                        </div>
+
+                        <span class="stat-badge">
+                            TOTAL
+                        </span>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Revenue
+                        </span>
+
+                        <h3>
+                            ₹{{ dashboard?.totalRevenue ?? 0 }}
+                        </h3>
+
+                        <p>
+                            Hospital revenue
+                        </p>
+
+                    </div>
+
+                    <div class="stat-decoration"></div>
 
                 </div>
 
@@ -46,100 +294,68 @@
 
         </div>
 
+    </section>
 
-        <!-- Doctors -->
 
-        <div class="col-md-3 mb-4">
+    <!-- =========================================
+         CHARTS
+         ========================================= -->
 
-            <div class="card text-bg-success shadow h-100">
+    <section class="charts-section">
 
-                <div class="card-body text-center">
+        <div class="section-heading">
 
-                    <h3>
-                        {{ dashboard?.totalDoctors ?? 0 }}
-                    </h3>
-
-                    <p class="mb-0">
-                        Total Doctors
-                    </p>
-
-                </div>
-
+            <div>
+                <span>ANALYTICS</span>
+                <h2>Healthcare Analytics</h2>
             </div>
+
+            <p>
+                Visual representation of hospital data
+            </p>
 
         </div>
 
 
-        <!-- Appointments -->
-
-        <div class="col-md-3 mb-4">
-
-            <div class="card text-bg-warning shadow h-100">
-
-                <div class="card-body text-center">
-
-                    <h3>
-                        {{ dashboard?.totalAppointments ?? 0 }}
-                    </h3>
-
-                    <p class="mb-0">
-                        Total Appointments
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
+        <div class="row g-4">
 
 
-        <!-- Revenue -->
+            <!-- BAR CHART -->
 
-        <div class="col-md-3 mb-4">
+            <div class="col-xl-8">
 
-            <div class="card text-bg-danger shadow h-100">
+                <div class="premium-chart-card">
 
-                <div class="card-body text-center">
+                    <div class="chart-card-header">
 
-                    <h3>
-                        ₹{{ dashboard?.totalRevenue ?? 0 }}
-                    </h3>
+                        <div class="chart-title">
 
-                    <p class="mb-0">
-                        Total Revenue
-                    </p>
+                            <div class="chart-icon blue-icon">
+                                📊
+                            </div>
 
-                </div>
+                            <div>
 
-            </div>
+                                <h3>
+                                    Hospital Statistics
+                                </h3>
 
-        </div>
+                                <p>
+                                    Patients, doctors and appointments
+                                </p>
 
-    </div>
+                            </div>
+
+                        </div>
+
+                        <span class="live-badge">
+                            ● LIVE
+                        </span>
+
+                    </div>
 
 
-    <!-- Charts -->
-
-    <div class="row">
-
-
-        <!-- Bar Chart -->
-
-        <div class="col-md-8 mb-4">
-
-            <div class="card shadow h-100">
-
-                <div class="card-header">
-
-                    <h5 class="mb-0">
-                        Hospital Statistics
-                    </h5>
-
-                </div>
-
-                <div class="card-body">
-
-                    <div style="height: 350px;">
+                    <div class="chart-content">
 
                         <canvas
                             baseChart
@@ -154,26 +370,39 @@
 
             </div>
 
-        </div>
+
+            <!-- DOUGHNUT CHART -->
+
+            <div class="col-xl-4">
+
+                <div class="premium-chart-card">
+
+                    <div class="chart-card-header">
+
+                        <div class="chart-title">
+
+                            <div class="chart-icon green-icon">
+                                🏥
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Healthcare Distribution
+                                </h3>
+
+                                <p>
+                                    Overall statistics
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
 
-        <!-- Doughnut Chart -->
-
-        <div class="col-md-4 mb-4">
-
-            <div class="card shadow h-100">
-
-                <div class="card-header">
-
-                    <h5 class="mb-0">
-                        Healthcare Distribution
-                    </h5>
-
-                </div>
-
-                <div class="card-body">
-
-                    <div style="height: 350px;">
+                    <div class="chart-content doughnut-content">
 
                         <canvas
                             baseChart
@@ -190,6 +419,172 @@
 
         </div>
 
-    </div>
+    </section>
+
+
+    <!-- =========================================
+         QUICK SERVICES
+         ========================================= -->
+
+    <section class="services-section">
+
+        <div class="section-heading">
+
+            <div>
+                <span>QUICK ACCESS</span>
+                <h2>Healthcare Services</h2>
+            </div>
+
+            <p>
+                Frequently used hospital modules
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-xl-3 col-lg-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon blue-service">
+                        👥
+                    </div>
+
+                    <div>
+                        <h3>Patients</h3>
+
+                        <p>
+                            Manage patient information
+                        </p>
+                    </div>
+
+                    <span class="service-arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-xl-3 col-lg-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon green-service">
+                        👨‍⚕️
+                    </div>
+
+                    <div>
+                        <h3>Doctors</h3>
+
+                        <p>
+                            Manage doctors and staff
+                        </p>
+                    </div>
+
+                    <span class="service-arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-xl-3 col-lg-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon orange-service">
+                        📅
+                    </div>
+
+                    <div>
+                        <h3>Appointments</h3>
+
+                        <p>
+                            Manage appointments
+                        </p>
+                    </div>
+
+                    <span class="service-arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-xl-3 col-lg-6">
+
+                <div class="service-card">
+
+                    <div class="service-icon red-service">
+                        💳
+                    </div>
+
+                    <div>
+                        <h3>Billing</h3>
+
+                        <p>
+                            Manage hospital billing
+                        </p>
+                    </div>
+
+                    <span class="service-arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         BOTTOM INFORMATION
+         ========================================= -->
+
+    <section class="bottom-banner">
+
+        <div class="bottom-banner-content">
+
+            <div class="bottom-icon">
+                🩺
+            </div>
+
+            <div>
+
+                <span>
+                    HEALTHCARE MANAGEMENT
+                </span>
+
+                <h2>
+                    Technology that helps you care better.
+                </h2>
+
+                <p>
+                    A centralized platform for efficient,
+                    secure and modern healthcare management.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="bottom-cross">
+            +
+        </div>
+
+    </section>
 
 </div>

@@ -2,8 +2,18 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { ApiResponse } from '../../models/api-response';
-import { Dashboard } from '../../models/dashboard';
+export interface DashboardData {
+  totalPatients: number;
+  totalDoctors: number;
+  totalAppointments: number;
+  totalRevenue: number;
+}
+
+export interface DashboardResponse {
+  success: boolean;
+  message: string;
+  data: DashboardData;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +24,7 @@ export class DashboardService {
 
   private apiUrl = 'http://localhost:8080/api/dashboard';
 
-  getDashboard(): Observable<ApiResponse<Dashboard>> {
-
-    return this.http.get<ApiResponse<Dashboard>>(this.apiUrl);
-
+  getDashboard(): Observable<DashboardResponse> {
+    return this.http.get<DashboardResponse>(this.apiUrl);
   }
-
 }

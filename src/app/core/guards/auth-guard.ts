@@ -8,11 +8,31 @@ export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
+  console.log('🔐 AUTH GUARD EXECUTED');
+
+  console.log(
+    '🌐 Window:',
+    typeof window !== 'undefined'
+  );
+
+  console.log(
+    '🎫 Token:',
+    authService.getToken()
+  );
+
+  console.log(
+    '✅ Is Logged In:',
+    authService.isLoggedIn()
+  );
+
   if (authService.isLoggedIn()) {
 
-    return true;
+    console.log('➡️ Guard allowing access');
 
+    return true;
   }
+
+  console.log('❌ Guard redirecting to login');
 
   return router.createUrlTree(['/login']);
 };

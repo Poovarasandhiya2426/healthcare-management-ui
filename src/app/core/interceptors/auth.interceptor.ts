@@ -33,7 +33,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
     catchError((error: HttpErrorResponse) => {
 
-      if (error.status === 401 || error.status === 403) {
+      if (error.status === 401) {
 
         console.log('JWT expired or unauthorized');
 

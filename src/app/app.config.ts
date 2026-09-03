@@ -5,8 +5,6 @@ import {
 
 import { provideRouter } from '@angular/router';
 
-import { provideClientHydration } from '@angular/platform-browser';
-
 import {
   provideHttpClient,
   withInterceptors
@@ -21,6 +19,7 @@ import { routes } from './app.routes';
 
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 
+
 export const appConfig: ApplicationConfig = {
 
   providers: [
@@ -29,13 +28,15 @@ export const appConfig: ApplicationConfig = {
 
     provideRouter(routes),
 
-    provideClientHydration(),
-
     provideHttpClient(
       withInterceptors([
         authInterceptor
       ])
     ),
+
+    // =========================
+    // Chart.js Configuration
+    // =========================
 
     provideCharts(
       withDefaultRegisterables()
