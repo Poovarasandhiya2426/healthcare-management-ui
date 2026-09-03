@@ -1,86 +1,266 @@
 <div class="container mt-4">
 
+    <!-- =========================================
+         ADD / UPDATE DOCTOR
+    ========================================== -->
+
     <app-add-doctor
         [selectedDoctor]="selectedDoctor"
         (doctorAdded)="onDoctorAdded()">
     </app-add-doctor>
 
+
+    <!-- =========================================
+         PAGE HEADER + SEARCH
+    ========================================== -->
+
     <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <h2>
+        <h2>
+            Doctor Management
+        </h2>
 
-        Doctor Management
+        <input
+            type="text"
+            class="form-control w-25"
+            placeholder="Search Doctor..."
+            [(ngModel)]="searchKeyword"
+            (keyup)="searchDoctors()">
 
-    </h2>
+    </div>
 
-    <input
-        type="text"
-        class="form-control w-25"
-        placeholder="Search Doctor..."
-        [(ngModel)]="searchKeyword"
-        (keyup)="searchDoctors()">
 
-</div>
+    <!-- =========================================
+         DOCTOR TABLE
+    ========================================== -->
 
-    <table class="table table-bordered table-striped">
+    <div class="table-responsive">
 
-        <thead class="table-dark">
+        <table class="table table-bordered table-striped">
 
-            <tr>
+            <thead class="table-dark">
 
-                <th>ID</th>
-                <th>Doctor Name</th>
-                <th>Specialization</th>
-                <th>Email</th>
-                <th>Mobile</th>
-                <th>Experience</th>
-                <th>Consultation Fee</th>
-                <th>Qualification</th>
-                <th>Hospital</th>
-                <th>Action</th>
+                <tr>
 
-            </tr>
+                    <th>ID</th>
+                    <th>Doctor Name</th>
+                    <th>Specialization</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Experience</th>
+                    <th>Consultation Fee</th>
+                    <th>Qualification</th>
+                    <th>Hospital</th>
+                    <th>Action</th>
 
-        </thead>
+                </tr>
 
-        <tbody>
+            </thead>
 
-            <tr *ngFor="let doctor of doctors">
 
-                <td>{{ doctor.doctorId }}</td>
-                <td>{{ doctor.doctorName }}</td>
-                <td>{{ doctor.specialization }}</td>
-                <td>{{ doctor.email }}</td>
-                <td>{{ doctor.mobileNumber }}</td>
-                <td>{{ doctor.experience }}</td>
-                <td>{{ doctor.consultationFee }}</td>
-                <td>{{ doctor.qualification }}</td>
-                <td>{{ doctor.hospitalName }}</td>
+            <tbody>
 
-                <td>
+                <!-- =========================================
+                     DOCTOR ROWS
+                ========================================== -->
 
-                    <button
-                        class="btn btn-warning btn-sm me-2"
-                        (click)="editDoctor(doctor)">
+                <tr
+                    *ngFor="let doctor of paginatedDoctors">
 
-                        Edit
+                    <td>
+                        {{ doctor.doctorId }}
+                    </td>
 
-                    </button>
+                    <td>
+                        {{ doctor.doctorName }}
+                    </td>
 
-                    <button
-                        class="btn btn-danger btn-sm"
-                        (click)="deleteDoctor(doctor.doctorId!)">
+                    <td>
+                        {{ doctor.specialization }}
+                    </td>
 
-                        Delete
+                    <td>
+                        {{ doctor.email }}
+                    </td>
 
-                    </button>
+                    <td>
+                        {{ doctor.mobileNumber }}
+                    </td>
 
-                </td>
+                    <td>
+                        {{ doctor.experience }} Years
+                    </td>
 
-            </tr>
+                    <td>
+                        ₹{{ doctor.consultationFee }}
+                    </td>
 
-        </tbody>
+                    <td>
+                        {{ doctor.qualification }}
+                    </td>
 
-    </table>
+                    <td>
+                        {{ doctor.hospitalName }}
+                    </td>
+
+
+                    <!-- =====================================
+                         ACTION BUTTONS
+                    ====================================== -->
+
+                    <td>
+
+                        <!-- VIEW -->
+
+                        <button
+                            class="btn btn-info btn-sm me-2"
+                            (click)="viewDoctor(doctor.doctorId!)">
+
+                            View
+
+                        </button>
+
+
+                        <!-- EDIT -->
+
+                        <button
+                            class="btn btn-warning btn-sm me-2"
+                            (click)="editDoctor(doctor)">
+
+                            Edit
+
+                        </button>
+
+
+                        <!-- DELETE -->
+
+                        <button
+                            class="btn btn-danger btn-sm"
+                            (click)="deleteDoctor(doctor.doctorId!)">
+
+                            Delete
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+
+                <!-- =========================================
+                     NO DATA
+                ========================================== -->
+
+                <tr *ngIf="paginatedDoctors.length === 0">
+
+                    <td
+                        colspan="10"
+                        class="text-center py-4">
+
+                        <div class="empty-state">
+
+                            <div class="empty-icon">
+                                🩺
+                            </div>
+
+                            <h5>
+                                No Doctors Found
+                            </h5>
+
+                            <p>
+                                No doctor records are available.
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- =========================================
+         PAGINATION
+    ========================================== -->
+
+    <div
+        class="pagination-container"
+        *ngIf="doctors.length > 0">
+
+        <div class="pagination-info">
+
+            Showing
+
+            <strong>
+                {{ ((currentPage - 1) * pageSize) + 1 }}
+            </strong>
+
+            –
+
+            <strong>
+                {{
+                    currentPage * pageSize > doctors.length
+                        ? doctors.length
+                        : currentPage * pageSize
+                }}
+            </strong>
+
+            of
+
+            <strong>
+                {{ doctors.length }}
+            </strong>
+
+            doctors
+
+        </div>
+
+
+        <div class="pagination-buttons">
+
+            <!-- PREVIOUS -->
+
+            <button
+                class="page-btn"
+                [disabled]="currentPage === 1"
+                (click)="previousPage()">
+
+                ‹ Previous
+
+            </button>
+
+
+            <!-- PAGE NUMBERS -->
+
+            <button
+                *ngFor="let page of pageNumbers"
+                class="page-number"
+                [class.active]="currentPage === page"
+                (click)="goToPage(page)">
+
+                {{ page }}
+
+            </button>
+
+
+            <!-- NEXT -->
+
+            <button
+                class="page-btn"
+                [disabled]="currentPage === totalPages"
+                (click)="nextPage()">
+
+                Next ›
+
+            </button>
+
+        </div>
+
+    </div>
 
 </div>

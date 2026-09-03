@@ -1,0 +1,457 @@
+/* ================================
+   DOCTOR MANAGEMENT PAGE
+================================ */
+
+.container {
+  max-width: 100%;
+}
+
+/* ================================
+   PAGE HEADER
+================================ */
+
+.d-flex {
+  background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+  padding: 22px 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(13, 110, 253, 0.18);
+}
+
+.d-flex h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* ================================
+   SEARCH BOX
+================================ */
+
+.d-flex input {
+  border: none;
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.d-flex input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35),
+              0 6px 18px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.d-flex input::placeholder {
+  color: #8a94a6;
+}
+
+/* ================================
+   DOCTOR TABLE CARD
+================================ */
+
+.table {
+  margin-top: 25px;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ================================
+   TABLE HEADER
+================================ */
+
+.table thead {
+  background: linear-gradient(135deg, #172b4d, #24466f);
+}
+
+.table thead th {
+  background: transparent;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 16px 12px;
+  border: none;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* ================================
+   TABLE BODY
+================================ */
+
+.table tbody tr {
+  transition: all 0.25s ease;
+}
+
+.table tbody tr:hover {
+  background: #f0f8ff;
+  transform: scale(1.002);
+}
+
+.table tbody td {
+  padding: 14px 12px;
+  font-size: 13px;
+  color: #394867;
+  border-color: #edf1f5;
+  vertical-align: middle;
+}
+
+/* Doctor ID */
+
+.table tbody td:first-child {
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+/* Doctor Name */
+
+.table tbody td:nth-child(2) {
+  font-weight: 600;
+  color: #172b4d;
+}
+
+/* Specialization */
+
+.table tbody td:nth-child(3) {
+  color: #0d6efd;
+  font-weight: 600;
+}
+
+/* Consultation Fee */
+
+.table tbody td:nth-child(7) {
+  font-weight: 700;
+  color: #198754;
+}
+
+/* ================================
+   ACTION BUTTONS
+================================ */
+
+.btn {
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 13px;
+  transition: all 0.25s ease;
+}
+
+.btn-warning {
+  color: #ffffff;
+  border: none;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+}
+
+.btn-warning:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(245, 158, 11, 0.3);
+}
+
+.btn-danger {
+  border: none;
+  background: linear-gradient(135deg, #dc3545, #b91c1c);
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* ================================
+   EMPTY TABLE
+================================ */
+
+.table tbody:empty::after {
+  content: "No doctors found";
+  display: block;
+  text-align: center;
+  padding: 30px;
+  color: #8a94a6;
+}
+
+/* ================================
+   ADD DOCTOR SECTION
+================================ */
+
+app-add-doctor {
+  display: block;
+  margin-bottom: 25px;
+}
+
+/* ================================
+   RESPONSIVE - LAPTOP
+================================ */
+
+@media (max-width: 1200px) {
+
+  .d-flex input {
+    width: 30% !important;
+  }
+
+  .table {
+    font-size: 12px;
+  }
+
+  .table thead th,
+  .table tbody td {
+    padding: 11px 8px;
+  }
+
+}
+
+/* ================================
+   RESPONSIVE - TABLET
+================================ */
+
+@media (max-width: 992px) {
+
+  .d-flex {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 15px;
+  }
+
+  .d-flex input {
+    width: 100% !important;
+  }
+
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+}
+
+/* ================================
+   RESPONSIVE - MOBILE
+================================ */
+
+@media (max-width: 576px) {
+
+  .container {
+    margin-top: 15px !important;
+  }
+
+  .d-flex {
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .d-flex h2 {
+    font-size: 22px;
+  }
+
+  .table {
+    margin-top: 18px;
+    border-radius: 12px;
+  }
+
+  .table thead th {
+    font-size: 11px;
+  }
+
+  .table tbody td {
+    font-size: 11px;
+  }
+
+  .btn {
+    padding: 6px 9px;
+    font-size: 11px;
+  }
+
+}
+
+/* ================================
+   4K DISPLAY
+================================ */
+
+@media (min-width: 2000px) {
+
+  .container {
+    max-width: 1900px;
+  }
+
+  .d-flex {
+    padding: 30px 35px;
+    border-radius: 20px;
+  }
+
+  .d-flex h2 {
+    font-size: 36px;
+  }
+
+  .d-flex input {
+    font-size: 17px;
+    padding: 15px 20px;
+  }
+
+  .table {
+    margin-top: 35px;
+    border-radius: 20px;
+  }
+
+  .table thead th {
+    font-size: 16px;
+    padding: 20px 16px;
+  }
+
+  .table tbody td {
+    font-size: 16px;
+    padding: 18px 16px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 10px 17px;
+  }
+
+}
+
+/* =========================================
+   PAGINATION
+========================================= */
+
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding: 15px 20px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.pagination-info {
+  color: #667085;
+  font-size: 14px;
+}
+
+.pagination-info strong {
+  color: #172b4d;
+}
+
+.pagination-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.page-btn,
+.page-number {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #dce3eb;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #344054;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.page-btn:hover:not(:disabled),
+.page-number:hover {
+  border-color: #0d6efd;
+  color: #0d6efd;
+  background: #f0f7ff;
+  transform: translateY(-1px);
+}
+
+.page-number.active {
+  background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+  border-color: #0d6efd;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.25);
+}
+
+.page-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty-state {
+  padding: 15px;
+}
+
+.empty-icon {
+  font-size: 38px;
+  margin-bottom: 8px;
+}
+
+.empty-state h5 {
+  margin-bottom: 5px;
+  color: #344054;
+  font-weight: 700;
+}
+
+.empty-state p {
+  margin: 0;
+  color: #98a2b3;
+  font-size: 13px;
+}
+
+/* =========================================
+   MOBILE PAGINATION
+========================================= */
+
+@media (max-width: 768px) {
+
+  .pagination-container {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .pagination-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page-btn,
+  .page-number {
+    min-width: 34px;
+    height: 34px;
+    font-size: 12px;
+  }
+
+}
+
+/* =========================================
+   4K PAGINATION
+========================================= */
+
+@media (min-width: 2000px) {
+
+  .pagination-container {
+    padding: 22px 28px;
+    border-radius: 18px;
+  }
+
+  .pagination-info {
+    font-size: 17px;
+  }
+
+  .page-btn,
+  .page-number {
+    min-width: 48px;
+    height: 48px;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+
+}

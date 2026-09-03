@@ -138,4 +138,17 @@ export class DoctorService {
 
 }
 
+
+// =========================================
+// GET DOCTOR BY ID
+// =========================================
+
+getDoctorById(id: number): Observable<ApiResponse<Doctor>> {
+
+  return this.http.get<ApiResponse<Doctor>>(
+    `${this.apiUrl}/${id}`
+  );
+
+}
+
 }
