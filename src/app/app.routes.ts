@@ -7,6 +7,7 @@ import { LoginComponent } from './features/auth/login/login';
 import { DashboardComponent } from './features/dashboard/dashboard';
 import { PatientComponent } from './features/patient/patient';
 import { DoctorComponent } from './features/doctor/doctor';
+import { DoctorDetailsComponent } from './features/doctor/doctor-details/doctor-details';
 import { AppointmentComponent } from './features/appointment/appointment';
 import { PrescriptionComponent } from './features/prescription/prescription';
 import { MedicalRecordComponent } from './features/medical-record/medical-record';
@@ -40,9 +41,25 @@ export const routes: Routes = [
         component: PatientComponent
       },
 
+      // ================================
+      // DOCTOR ROUTES
+      // ================================
+
       {
         path: 'doctors',
-        component: DoctorComponent
+        children: [
+
+          {
+            path: '',
+            component: DoctorComponent
+          },
+
+          {
+            path: ':id',
+            component: DoctorDetailsComponent
+          }
+
+        ]
       },
 
       {

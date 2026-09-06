@@ -1,1 +1,419 @@
-<p>doctor-details works!</p>
+<div class="doctor-details-page">
+
+  <!-- =========================================
+       LOADING
+  ========================================== -->
+
+  <div
+    class="loading-container"
+    *ngIf="isLoading">
+
+    <div class="spinner"></div>
+
+    <p>
+      Loading doctor details...
+    </p>
+
+  </div>
+
+
+  <!-- =========================================
+       DOCTOR DETAILS
+  ========================================== -->
+
+  <div
+    class="details-container"
+    *ngIf="!isLoading && doctor">
+
+    <!-- HEADER -->
+
+    <div class="details-header">
+
+      <button
+        type="button"
+        class="back-btn"
+        (click)="goBack()">
+
+        ← Back to Doctors
+
+      </button>
+
+
+      <div class="header-content">
+
+        <div class="doctor-avatar">
+
+          {{ doctor.doctorName.charAt(0).toUpperCase() }}
+
+        </div>
+
+
+        <div class="doctor-heading">
+
+          <h1>
+            Dr. {{ doctor.doctorName }}
+          </h1>
+
+          <p>
+            {{ doctor.specialization }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================
+         PROFILE CONTENT
+    ========================================== -->
+
+    <div class="profile-grid">
+
+
+      <!-- PROFESSIONAL INFORMATION -->
+
+      <div class="details-card">
+
+        <div class="card-title">
+
+          <span class="title-icon">
+            👨‍⚕️
+          </span>
+
+          <h3>
+            Professional Information
+          </h3>
+
+        </div>
+
+
+        <div class="info-grid">
+
+          <div class="info-item">
+
+            <span class="label">
+              Doctor ID
+            </span>
+
+            <span class="value">
+              #{{ doctor.doctorId }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              Specialization
+            </span>
+
+            <span class="value highlight">
+              {{ doctor.specialization }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              Qualification
+            </span>
+
+            <span class="value">
+              {{ doctor.qualification }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              Experience
+            </span>
+
+            <span class="value">
+              {{ doctor.experience }} Years
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              Consultation Fee
+            </span>
+
+            <span class="value fee">
+              ₹{{ doctor.consultationFee }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              Hospital
+            </span>
+
+            <span class="value">
+              {{ doctor.hospitalName }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CONTACT INFORMATION -->
+
+      <div class="details-card">
+
+        <div class="card-title">
+
+          <span class="title-icon">
+            📞
+          </span>
+
+          <h3>
+            Contact Information
+          </h3>
+
+        </div>
+
+
+        <div class="contact-list">
+
+
+          <div class="contact-item">
+
+            <div class="contact-icon">
+              ✉️
+            </div>
+
+            <div class="contact-content">
+
+              <span class="label">
+                Email
+              </span>
+
+              <p>
+                {{ doctor.email }}
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="contact-item">
+
+            <div class="contact-icon">
+              📱
+            </div>
+
+            <div class="contact-content">
+
+              <span class="label">
+                Mobile Number
+              </span>
+
+              <p>
+                {{ doctor.mobileNumber }}
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="contact-item">
+
+            <div class="contact-icon">
+              🏥
+            </div>
+
+            <div class="contact-content">
+
+              <span class="label">
+                Hospital
+              </span>
+
+              <p>
+                {{ doctor.hospitalName }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================
+         QUICK SUMMARY
+    ========================================== -->
+
+    <div class="summary-section">
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          🎓
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            Qualification
+          </span>
+
+          <strong>
+            {{ doctor.qualification }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          ⭐
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            Experience
+          </span>
+
+          <strong>
+            {{ doctor.experience }} Years
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          💰
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            Consultation Fee
+          </span>
+
+          <strong>
+            ₹{{ doctor.consultationFee }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          🏥
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            Hospital
+          </span>
+
+          <strong>
+            {{ doctor.hospitalName }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================
+         FOOTER ACTIONS
+    ========================================== -->
+
+    <div class="details-footer">
+
+      <button
+        type="button"
+        class="edit-main-btn"
+        (click)="editDoctor()">
+
+        ✏️ Edit Doctor
+
+      </button>
+
+
+      <button
+        type="button"
+        class="back-main-btn"
+        (click)="goBack()">
+
+        ← Back to Doctor Management
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       DOCTOR NOT FOUND
+  ========================================== -->
+
+  <div
+    class="not-found"
+    *ngIf="!isLoading && !doctor">
+
+    <div class="not-found-icon">
+      🩺
+    </div>
+
+    <h2>
+      Doctor Not Found
+    </h2>
+
+    <p>
+      We couldn't find the requested doctor details.
+    </p>
+
+    <button
+      type="button"
+      class="back-main-btn"
+      (click)="goBack()">
+
+      ← Back to Doctors
+
+    </button>
+
+  </div>
+
+</div>
