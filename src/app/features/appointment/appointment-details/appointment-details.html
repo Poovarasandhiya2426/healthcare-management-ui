@@ -1,0 +1,430 @@
+<div class="appointment-details-page">
+
+  <!-- Loading -->
+  <div
+    class="loading-container"
+    *ngIf="isLoading">
+
+    <div class="spinner"></div>
+
+    <p>
+      Loading appointment details...
+    </p>
+
+  </div>
+
+
+  <!-- Appointment Details -->
+  <div
+    class="details-container"
+    *ngIf="!isLoading && appointment">
+
+
+    <!-- Header -->
+    <div class="details-header">
+
+      <button
+        type="button"
+        class="back-btn"
+        (click)="goBack()">
+
+        ← Back to Appointments
+
+      </button>
+
+
+      <div class="header-content">
+
+        <div class="appointment-avatar">
+
+          📅
+
+        </div>
+
+
+        <div class="appointment-heading">
+
+          <h1>
+            Appointment #{{ appointment.appointmentId }}
+          </h1>
+
+          <p>
+            {{ appointment.appointmentDate }}
+            •
+            {{ appointment.appointmentTime }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Main Information -->
+    <div class="profile-grid">
+
+
+      <!-- Patient Information -->
+      <div class="details-card">
+
+        <div class="card-title">
+
+          <span class="title-icon">
+            🧑‍⚕️
+          </span>
+
+          <h3>
+            Patient Information
+          </h3>
+
+        </div>
+
+
+        <div class="info-grid">
+
+          <div class="info-item">
+
+            <span class="label">
+              Patient ID
+            </span>
+
+            <span class="value">
+              #{{ appointment.patientId }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              Patient Name
+            </span>
+
+            <span class="value highlight">
+              {{ appointment.patientName || 'N/A' }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Doctor Information -->
+      <div class="details-card">
+
+        <div class="card-title">
+
+          <span class="title-icon">
+            👨‍⚕️
+          </span>
+
+          <h3>
+            Doctor Information
+          </h3>
+
+        </div>
+
+
+        <div class="info-grid">
+
+          <div class="info-item">
+
+            <span class="label">
+              Doctor ID
+            </span>
+
+            <span class="value">
+              #{{ appointment.doctorId }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              Doctor Name
+            </span>
+
+            <span class="value highlight">
+              {{ appointment.doctorName || 'N/A' }}
+            </span>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="label">
+              Specialization
+            </span>
+
+            <span class="value">
+              {{ appointment.specialization || 'N/A' }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Appointment Information -->
+    <div class="details-card appointment-info-card">
+
+      <div class="card-title">
+
+        <span class="title-icon">
+          📋
+        </span>
+
+        <h3>
+          Appointment Information
+        </h3>
+
+      </div>
+
+
+      <div class="appointment-info-grid">
+
+
+        <div class="info-item">
+
+          <span class="label">
+            Appointment ID
+          </span>
+
+          <span class="value">
+            #{{ appointment.appointmentId }}
+          </span>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <span class="label">
+            Appointment Date
+          </span>
+
+          <span class="value">
+            {{ appointment.appointmentDate }}
+          </span>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <span class="label">
+            Appointment Time
+          </span>
+
+          <span class="value">
+            {{ appointment.appointmentTime }}
+          </span>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <span class="label">
+            Status
+          </span>
+
+          <span
+            class="status-badge"
+            [ngClass]="getStatusClass(appointment.status)">
+
+            {{ appointment.status }}
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- Reason -->
+      <div class="reason-section">
+
+        <span class="label">
+          Appointment Reason
+        </span>
+
+        <div class="reason-box">
+
+          {{ appointment.reason }}
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Summary -->
+    <div class="summary-section">
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          🧑
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            Patient
+          </span>
+
+          <strong>
+            {{ appointment.patientName || 'N/A' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          👨‍⚕️
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            Doctor
+          </span>
+
+          <strong>
+            {{ appointment.doctorName || 'N/A' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          📅
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            Date
+          </span>
+
+          <strong>
+            {{ appointment.appointmentDate }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          ⏰
+        </div>
+
+        <div class="summary-content">
+
+          <span>
+            Time
+          </span>
+
+          <strong>
+            {{ appointment.appointmentTime }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Footer Buttons -->
+    <div class="details-footer">
+
+
+      <button
+        type="button"
+        class="edit-main-btn"
+        (click)="editAppointment()">
+
+        ✏️ Edit Appointment
+
+      </button>
+
+
+      <button
+        type="button"
+        class="back-main-btn"
+        (click)="goBack()">
+
+        ← Back to Appointment Management
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Not Found -->
+  <div
+    class="not-found"
+    *ngIf="!isLoading && !appointment">
+
+    <div class="not-found-icon">
+      📅
+    </div>
+
+    <h2>
+      Appointment Not Found
+    </h2>
+
+    <p>
+      We couldn't find the requested appointment details.
+    </p>
+
+    <button
+      type="button"
+      class="back-main-btn"
+      (click)="goBack()">
+
+      ← Back to Appointments
+
+    </button>
+
+  </div>
+
+</div>

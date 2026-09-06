@@ -1,9 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, switchMap, tap, map } from 'rxjs';
+
+import {
+  BehaviorSubject,
+  Observable,
+  switchMap,
+  tap,
+  map
+} from 'rxjs';
 
 import { Appointment } from '../../models/appointment';
 import { ApiResponse } from '../../models/api-response';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +20,17 @@ export class AppointmentService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:8080/api/appointments';
+  private apiUrl =
+    'http://localhost:8080/api/appointments';
 
-  private appointmentsSubject = new BehaviorSubject<Appointment[]>([]);
 
-  appointments$ = this.appointmentsSubject.asObservable();
+  private appointmentsSubject =
+    new BehaviorSubject<Appointment[]>([]);
+
+
+  appointments$ =
+    this.appointmentsSubject.asObservable();
+
 
   constructor() {
 
@@ -24,21 +38,35 @@ export class AppointmentService {
 
   }
 
+
+  // ==========================================
+  // GET ALL APPOINTMENTS
+  // ==========================================
+
   loadAppointments(): void {
 
     this.http
-      .get<ApiResponse<Appointment[]>>(this.apiUrl)
+      .get<ApiResponse<Appointment[]>>(
+        this.apiUrl
+      )
       .subscribe({
 
-        next: (response) => {
+        next: (
+          response: ApiResponse<Appointment[]>
+        ) => {
 
-          this.appointmentsSubject.next(response.data);
+          this.appointmentsSubject.next(
+            response.data
+          );
 
         },
 
-        error: (err) => {
+        error: (err: any) => {
 
-          console.error(err);
+          console.error(
+            '❌ Failed to load appointments:',
+            err
+          );
 
         }
 
@@ -46,27 +74,67 @@ export class AppointmentService {
 
   }
 
-  addAppointment(appointment: Appointment): Observable<ApiResponse<Appointment>> {
+
+  // ==========================================
+  // GET APPOINTMENT BY ID
+  // ==========================================
+
+  getAppointmentById(
+    id: number
+  ): Observable<ApiResponse<Appointment>> {
+
+    return this.http.get<
+      ApiResponse<Appointment>
+    >(
+      `${this.apiUrl}/${id}`
+    );
+
+  }
+
+
+  // ==========================================
+  // ADD APPOINTMENT
+  // ==========================================
+
+  addAppointment(
+    appointment: Appointment
+  ): Observable<ApiResponse<Appointment>> {
 
     return this.http
-      .post<ApiResponse<Appointment>>(this.apiUrl, appointment)
+      .post<ApiResponse<Appointment>>(
+        this.apiUrl,
+        appointment
+      )
       .pipe(
 
-        switchMap(response =>
+        switchMap(
+          (
+            response: ApiResponse<Appointment>
+          ) =>
 
-          this.http
-            .get<ApiResponse<Appointment[]>>(this.apiUrl)
-            .pipe(
+            this.http
+              .get<ApiResponse<Appointment[]>>(
+                this.apiUrl
+              )
+              .pipe(
 
-              tap(result => {
+                tap(
+                  (
+                    result: ApiResponse<Appointment[]>
+                  ) => {
 
-                this.appointmentsSubject.next(result.data);
+                    this.appointmentsSubject.next(
+                      result.data
+                    );
 
-              }),
+                  }
+                ),
 
-              map(() => response)
+                map(
+                  () => response
+                )
 
-            )
+              )
 
         )
 
@@ -74,27 +142,51 @@ export class AppointmentService {
 
   }
 
-  updateAppointment(id: number, appointment: Appointment): Observable<ApiResponse<Appointment>> {
+
+  // ==========================================
+  // UPDATE APPOINTMENT
+  // ==========================================
+
+  updateAppointment(
+    id: number,
+    appointment: Appointment
+  ): Observable<ApiResponse<Appointment>> {
 
     return this.http
-      .put<ApiResponse<Appointment>>(`${this.apiUrl}/${id}`, appointment)
+      .put<ApiResponse<Appointment>>(
+        `${this.apiUrl}/${id}`,
+        appointment
+      )
       .pipe(
 
-        switchMap(response =>
+        switchMap(
+          (
+            response: ApiResponse<Appointment>
+          ) =>
 
-          this.http
-            .get<ApiResponse<Appointment[]>>(this.apiUrl)
-            .pipe(
+            this.http
+              .get<ApiResponse<Appointment[]>>(
+                this.apiUrl
+              )
+              .pipe(
 
-              tap(result => {
+                tap(
+                  (
+                    result: ApiResponse<Appointment[]>
+                  ) => {
 
-                this.appointmentsSubject.next(result.data);
+                    this.appointmentsSubject.next(
+                      result.data
+                    );
 
-              }),
+                  }
+                ),
 
-              map(() => response)
+                map(
+                  () => response
+                )
 
-            )
+              )
 
         )
 
@@ -102,27 +194,49 @@ export class AppointmentService {
 
   }
 
-  deleteAppointment(id: number): Observable<ApiResponse<any>> {
+
+  // ==========================================
+  // DELETE APPOINTMENT
+  // ==========================================
+
+  deleteAppointment(
+    id: number
+  ): Observable<ApiResponse<any>> {
 
     return this.http
-      .delete<ApiResponse<any>>(`${this.apiUrl}/${id}`)
+      .delete<ApiResponse<any>>(
+        `${this.apiUrl}/${id}`
+      )
       .pipe(
 
-        switchMap(response =>
+        switchMap(
+          (
+            response: ApiResponse<any>
+          ) =>
 
-          this.http
-            .get<ApiResponse<Appointment[]>>(this.apiUrl)
-            .pipe(
+            this.http
+              .get<ApiResponse<Appointment[]>>(
+                this.apiUrl
+              )
+              .pipe(
 
-              tap(result => {
+                tap(
+                  (
+                    result: ApiResponse<Appointment[]>
+                  ) => {
 
-                this.appointmentsSubject.next(result.data);
+                    this.appointmentsSubject.next(
+                      result.data
+                    );
 
-              }),
+                  }
+                ),
 
-              map(() => response)
+                map(
+                  () => response
+                )
 
-            )
+              )
 
         )
 
