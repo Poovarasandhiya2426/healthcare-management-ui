@@ -1,0 +1,501 @@
+<div class="prescription-details-container">
+
+  <!-- ========================================== -->
+  <!-- PAGE HEADER -->
+  <!-- ========================================== -->
+
+  <div class="page-header">
+
+    <div>
+      <h2>💊 Prescription Details</h2>
+
+      <p>
+        View complete prescription information
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="goBack()">
+
+      ← Back to Prescriptions
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- LOADING -->
+  <!-- ========================================== -->
+
+  <div
+    *ngIf="isLoading"
+    class="loading-container">
+
+    <div class="spinner"></div>
+
+    <h5>
+      Loading Prescription Details...
+    </h5>
+
+    <p>
+      Please wait while we fetch the prescription information.
+    </p>
+
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- ERROR -->
+  <!-- ========================================== -->
+
+  <div
+    *ngIf="!isLoading && errorMessage"
+    class="error-container">
+
+    <div class="error-icon">
+      ⚠️
+    </div>
+
+    <h4>
+      Unable to Load Prescription
+    </h4>
+
+    <p>
+      {{ errorMessage }}
+    </p>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="goBack()">
+
+      ← Back to Prescriptions
+
+    </button>
+
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- PRESCRIPTION DETAILS -->
+  <!-- ========================================== -->
+
+  <div
+    *ngIf="!isLoading && prescription"
+    class="details-wrapper">
+
+
+    <!-- ======================================== -->
+    <!-- MAIN PRESCRIPTION CARD -->
+    <!-- ======================================== -->
+
+    <div class="prescription-card main-card">
+
+      <div class="card-top">
+
+        <div>
+
+          <span class="section-label">
+            PRESCRIPTION
+          </span>
+
+          <h3>
+            💊 Prescription #{{ prescription.prescriptionId }}
+          </h3>
+
+        </div>
+
+
+        <div class="status-badge">
+          ACTIVE
+        </div>
+
+      </div>
+
+
+      <div class="divider"></div>
+
+
+      <!-- ====================================== -->
+      <!-- QUICK INFORMATION -->
+      <!-- ====================================== -->
+
+      <div class="quick-info">
+
+
+        <!-- Prescription Date -->
+
+        <div class="info-item">
+
+          <span class="info-label">
+            📅 Prescription Date
+          </span>
+
+          <strong>
+            {{ prescription.prescriptionDate }}
+          </strong>
+
+        </div>
+
+
+        <!-- Patient -->
+
+        <div class="info-item">
+
+          <span class="info-label">
+            👤 Patient
+          </span>
+
+          <strong>
+            {{ prescription.patientName }}
+          </strong>
+
+        </div>
+
+
+        <!-- Doctor -->
+
+        <div class="info-item">
+
+          <span class="info-label">
+            👨‍⚕️ Doctor
+          </span>
+
+          <strong>
+            {{ prescription.doctorName }}
+          </strong>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================== -->
+    <!-- PATIENT + DOCTOR -->
+    <!-- ======================================== -->
+
+    <div class="two-column">
+
+
+      <!-- ====================================== -->
+      <!-- PATIENT INFORMATION -->
+      <!-- ====================================== -->
+
+      <div class="prescription-card">
+
+        <div class="card-title">
+
+          <div class="title-icon patient-icon">
+            👤
+          </div>
+
+          <div>
+
+            <h4>
+              Patient Information
+            </h4>
+
+            <span>
+              Patient details
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="details-list">
+
+
+          <div class="detail-row">
+
+            <span>
+              Patient Name
+            </span>
+
+            <strong>
+              {{ prescription.patientName }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span>
+              Patient ID
+            </span>
+
+            <strong>
+              {{ prescription.patientId }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span>
+              Appointment ID
+            </span>
+
+            <strong>
+              {{ prescription.appointmentId }}
+            </strong>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ====================================== -->
+      <!-- DOCTOR INFORMATION -->
+      <!-- ====================================== -->
+
+      <div class="prescription-card">
+
+        <div class="card-title">
+
+          <div class="title-icon doctor-icon">
+            👨‍⚕️
+          </div>
+
+          <div>
+
+            <h4>
+              Doctor Information
+            </h4>
+
+            <span>
+              Prescribing doctor
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="details-list">
+
+
+          <div class="detail-row">
+
+            <span>
+              Doctor Name
+            </span>
+
+            <strong>
+              {{ prescription.doctorName }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span>
+              Doctor ID
+            </span>
+
+            <strong>
+              {{ prescription.doctorId }}
+            </strong>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- ======================================== -->
+    <!-- MEDICINE INFORMATION -->
+    <!-- ======================================== -->
+
+    <div class="prescription-card medicine-card">
+
+
+      <div class="card-title">
+
+        <div class="title-icon medicine-icon">
+          💊
+        </div>
+
+        <div>
+
+          <h4>
+            Medicine Information
+          </h4>
+
+          <span>
+            Prescribed medication details
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="medicine-grid">
+
+
+        <!-- Medicine Name -->
+
+        <div class="medicine-field">
+
+          <label>
+            Medicine Name
+          </label>
+
+          <div class="medicine-value">
+
+            💊 {{ prescription.medicineName }}
+
+          </div>
+
+        </div>
+
+
+        <!-- Dosage -->
+
+        <div class="medicine-field">
+
+          <label>
+            Dosage
+          </label>
+
+          <div class="medicine-value">
+
+            {{ prescription.dosage }}
+
+          </div>
+
+        </div>
+
+
+        <!-- Frequency -->
+
+        <div class="medicine-field">
+
+          <label>
+            Frequency
+          </label>
+
+          <div class="medicine-value">
+
+            {{ prescription.frequency }}
+
+          </div>
+
+        </div>
+
+
+        <!-- Duration -->
+
+        <div class="medicine-field">
+
+          <label>
+            Duration
+          </label>
+
+          <div class="medicine-value">
+
+            {{ prescription.durationInDays }} Days
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================== -->
+    <!-- INSTRUCTIONS -->
+    <!-- ======================================== -->
+
+    <div class="prescription-card instructions-card">
+
+
+      <div class="card-title">
+
+        <div class="title-icon instruction-icon">
+          📝
+        </div>
+
+        <div>
+
+          <h4>
+            Instructions
+          </h4>
+
+          <span>
+            Doctor's instructions for the patient
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="instructions-box">
+
+        {{
+          prescription.instructions ||
+          'No instructions provided.'
+        }}
+
+      </div>
+
+
+    </div>
+
+
+    <!-- ======================================== -->
+    <!-- ACTION BUTTONS -->
+    <!-- ======================================== -->
+
+    <div class="action-section">
+
+
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="goBack()">
+
+        ← Back
+
+      </button>
+
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="editPrescription()">
+
+        ✏️ Edit Prescription
+
+      </button>
+
+
+    </div>
+
+
+  </div>
+
+</div>

@@ -1,71 +1,684 @@
-<div class="container mt-4">
+<div class="prescription-page">
 
-    <app-add-prescription
-        [selectedPrescription]="selectedPrescription"
-        (prescriptionAdded)="onPrescriptionAdded()">
-    </app-add-prescription>
+  <!-- ==========================================
+       ADD / UPDATE PRESCRIPTION
+  =========================================== -->
 
-    <h2 class="mb-4">
-        Prescription Management
-    </h2>
+  <app-add-prescription
+    [selectedPrescription]="selectedPrescription"
+    (prescriptionAdded)="onPrescriptionAdded()">
+  </app-add-prescription>
 
-    <table class="table table-bordered table-striped">
 
-        <thead class="table-dark">
+  <!-- ==========================================
+       PAGE HEADER
+  =========================================== -->
 
-            <tr>
+  <div class="page-header">
 
-                <th>ID</th>
-                <th>Patient</th>
-                <th>Doctor</th>
-                <th>Medicine</th>
-                <th>Dosage</th>
-                <th>Frequency</th>
-                <th>Duration</th>
-                <th>Date</th>
-                <th>Action</th>
+    <div class="header-left">
 
-            </tr>
+      <div class="header-icon">
+        💊
+      </div>
+
+      <div class="header-content">
+
+        <h1>
+          Prescription Management
+        </h1>
+
+        <p>
+          Manage medicines, dosage and patient prescriptions
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="total-prescriptions">
+
+      <span>
+        Total Prescriptions
+      </span>
+
+      <strong>
+        {{ prescriptions.length }}
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       STAT CARDS
+  =========================================== -->
+
+  <div class="stats-grid">
+
+
+    <!-- Total Prescriptions -->
+
+    <div class="stat-card total-card">
+
+      <div class="stat-icon">
+        📋
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          Total Prescriptions
+        </span>
+
+        <strong>
+          {{ prescriptions.length }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- Unique Medicines -->
+
+    <div class="stat-card medicine-card">
+
+      <div class="stat-icon">
+        💊
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          Medicines
+        </span>
+
+        <strong>
+          {{ uniqueMedicineCount }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- Patients -->
+
+    <div class="stat-card patient-card">
+
+      <div class="stat-icon">
+        👥
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          Patients
+        </span>
+
+        <strong>
+          {{ uniquePatientCount }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- Doctors -->
+
+    <div class="stat-card doctor-card">
+
+      <div class="stat-icon">
+        👨‍⚕️
+      </div>
+
+      <div class="stat-content">
+
+        <span>
+          Doctors
+        </span>
+
+        <strong>
+          {{ uniqueDoctorCount }}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================
+       PRESCRIPTION TABLE CARD
+  =========================================== -->
+
+  <div class="table-card">
+
+
+    <!-- ========================================
+         TOOLBAR
+    ========================================= -->
+
+    <div class="table-toolbar">
+
+      <div class="toolbar-title">
+
+        <h2>
+          Prescription List
+        </h2>
+
+        <p>
+          View and manage all prescriptions
+        </p>
+
+      </div>
+
+
+      <div class="toolbar-actions">
+
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+          <span class="search-icon">
+            🔍
+          </span>
+
+          <input
+            type="text"
+            [(ngModel)]="searchKeyword"
+            (input)="searchPrescriptions()"
+            placeholder="Search patient, doctor, medicine..."
+          />
+
+        </div>
+
+
+        <!-- Clear -->
+
+        <button
+          type="button"
+          class="clear-btn"
+          (click)="clearSearch()">
+
+          ✕ Clear
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================================
+         TABLE
+    ========================================= -->
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              ID
+            </th>
+
+            <th>
+              Patient
+            </th>
+
+            <th>
+              Doctor
+            </th>
+
+            <th>
+              Medicine
+            </th>
+
+            <th>
+              Dosage
+            </th>
+
+            <th>
+              Frequency
+            </th>
+
+            <th>
+              Duration
+            </th>
+
+            <th>
+              Date
+            </th>
+
+            <th>
+              Action
+            </th>
+
+          </tr>
 
         </thead>
 
+
         <tbody>
 
-            <tr *ngFor="let prescription of prescriptions">
 
-                <td>{{ prescription.prescriptionId }}</td>
-                <td>{{ prescription.patientName }}</td>
-                <td>{{ prescription.doctorName }}</td>
-                <td>{{ prescription.medicineName }}</td>
-                <td>{{ prescription.dosage }}</td>
-                <td>{{ prescription.frequency }}</td>
-                <td>{{ prescription.durationInDays }} Days</td>
-                <td>{{ prescription.prescriptionDate }}</td>
+          <!-- ==================================
+               PRESCRIPTION ROW
+          =================================== -->
 
-                <td>
+          <tr
+            *ngFor="
+              let prescription
+              of paginatedPrescriptions
+            ">
 
-                    <button
-                        class="btn btn-warning btn-sm me-2"
-                        (click)="editPrescription(prescription)">
 
-                        Edit
+            <!-- ID -->
 
-                    </button>
+            <td>
 
-                    <button
-                        class="btn btn-danger btn-sm"
-                        (click)="deletePrescription(prescription.prescriptionId!)">
+              <span class="prescription-id">
 
-                        Delete
+                #{{ prescription.prescriptionId }}
 
-                    </button>
+              </span>
 
-                </td>
+            </td>
 
-            </tr>
+
+            <!-- Patient -->
+
+            <td>
+
+              <div class="person-cell">
+
+                <div class="person-avatar patient-avatar">
+
+                  {{
+                    prescription.patientName
+                      ? prescription.patientName
+                          .charAt(0)
+                          .toUpperCase()
+                      : 'P'
+                  }}
+
+                </div>
+
+
+                <div class="person-info">
+
+                  <strong>
+
+                    {{
+                      prescription.patientName ||
+                      'N/A'
+                    }}
+
+                  </strong>
+
+                  <small>
+
+                    Patient #{{ prescription.patientId }}
+
+                  </small>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- Doctor -->
+
+            <td>
+
+              <div class="person-cell">
+
+                <div class="person-avatar doctor-avatar">
+
+                  {{
+                    prescription.doctorName
+                      ? prescription.doctorName
+                          .charAt(0)
+                          .toUpperCase()
+                      : 'D'
+                  }}
+
+                </div>
+
+
+                <div class="person-info">
+
+                  <strong>
+
+                    {{
+                      prescription.doctorName ||
+                      'N/A'
+                    }}
+
+                  </strong>
+
+                  <small>
+
+                    Doctor #{{ prescription.doctorId }}
+
+                  </small>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- Medicine -->
+
+            <td>
+
+              <div class="medicine-cell">
+
+                <span class="medicine-icon">
+                  💊
+                </span>
+
+                <strong>
+
+                  {{
+                    prescription.medicineName
+                  }}
+
+                </strong>
+
+              </div>
+
+            </td>
+
+
+            <!-- Dosage -->
+
+            <td>
+
+              <span class="dosage-badge">
+
+                {{ prescription.dosage }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Frequency -->
+
+            <td>
+
+              <span class="frequency-text">
+
+                {{ prescription.frequency }}
+
+              </span>
+
+            </td>
+
+
+            <!-- Duration -->
+
+            <td>
+
+              <div class="duration-cell">
+
+                <strong>
+
+                  {{
+                    prescription.durationInDays
+                  }}
+
+                </strong>
+
+                <span>
+                  Days
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <!-- Date -->
+
+            <td>
+
+              <div class="date-cell">
+
+                <span>
+                  📅
+                </span>
+
+                <span>
+
+                  {{
+                    prescription.prescriptionDate
+                  }}
+
+                </span>
+
+              </div>
+
+            </td>
+
+
+            <!-- Actions -->
+
+            <td>
+
+              <div class="action-buttons">
+
+
+                <!-- View -->
+
+                <button
+                  type="button"
+                  class="action-btn view-btn"
+                  title="View Prescription"
+                  (click)="
+                    viewPrescription(
+                      prescription.prescriptionId!
+                    )
+                  ">
+
+                  👁
+
+                </button>
+
+
+                <!-- Edit -->
+
+                <button
+                  type="button"
+                  class="action-btn edit-btn"
+                  title="Edit Prescription"
+                  (click)="
+                    editPrescription(
+                      prescription
+                    )
+                  ">
+
+                  ✏️
+
+                </button>
+
+
+                <!-- Delete -->
+
+                <button
+                  type="button"
+                  class="action-btn delete-btn"
+                  title="Delete Prescription"
+                  (click)="
+                    deletePrescription(
+                      prescription.prescriptionId!
+                    )
+                  ">
+
+                  🗑
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+
+          <!-- ==================================
+               EMPTY STATE
+          =================================== -->
+
+          <tr
+            *ngIf="
+              paginatedPrescriptions.length === 0
+            ">
+
+            <td
+              colspan="9"
+              class="empty-cell">
+
+              <div class="empty-state">
+
+                <div class="empty-icon">
+                  💊
+                </div>
+
+                <h3>
+                  No Prescriptions Found
+                </h3>
+
+                <p>
+                  Try changing your search
+                  or add a new prescription.
+                </p>
+
+                <button
+                  type="button"
+                  class="empty-btn"
+                  (click)="clearSearch()">
+
+                  Clear Search
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
 
         </tbody>
 
-    </table>
+      </table>
+
+    </div>
+
+
+    <!-- ========================================
+         PAGINATION
+    ========================================= -->
+
+    <div
+      class="pagination-container"
+      *ngIf="
+        filteredPrescriptions.length > 0
+      ">
+
+
+      <div class="pagination-info">
+
+        Showing
+
+        <strong>
+          {{ showingStart }}
+        </strong>
+
+        -
+
+        <strong>
+          {{ showingEnd }}
+        </strong>
+
+        of
+
+        <strong>
+          {{ filteredPrescriptions.length }}
+        </strong>
+
+        prescriptions
+
+      </div>
+
+
+      <div class="pagination">
+
+
+        <!-- Previous -->
+
+        <button
+          type="button"
+          class="page-btn"
+          [disabled]="currentPage === 1"
+          (click)="previousPage()">
+
+          ‹
+
+        </button>
+
+
+        <!-- Pages -->
+
+        <button
+          type="button"
+          class="page-btn"
+          *ngFor="
+            let page of pageNumbers
+          "
+          [class.active]="
+            currentPage === page
+          "
+          (click)="goToPage(page)">
+
+          {{ page }}
+
+        </button>
+
+
+        <!-- Next -->
+
+        <button
+          type="button"
+          class="page-btn"
+          [disabled]="
+            currentPage === totalPages
+          "
+          (click)="nextPage()">
+
+          ›
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>

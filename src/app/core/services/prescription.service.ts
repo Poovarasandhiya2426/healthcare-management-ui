@@ -1,24 +1,56 @@
 import { Injectable, inject } from '@angular/core';
+
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, switchMap, tap, map } from 'rxjs';
+
+import {
+  BehaviorSubject,
+  Observable,
+  switchMap,
+  tap,
+  map
+} from 'rxjs';
 
 import { Prescription } from '../../models/prescription';
+
 import { ApiResponse } from '../../models/api-response';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PrescriptionService {
 
+
+  // ==========================================
+  // HTTP CLIENT
+  // ==========================================
+
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:8080/api/prescriptions';
+
+  // ==========================================
+  // API URL
+  // ==========================================
+
+  private apiUrl =
+    'http://localhost:8080/api/prescriptions';
+
+
+  // ==========================================
+  // PRESCRIPTION SUBJECT
+  // ==========================================
 
   private prescriptionsSubject =
     new BehaviorSubject<Prescription[]>([]);
 
+
   prescriptions$ =
     this.prescriptionsSubject.asObservable();
+
+
+  // ==========================================
+  // CONSTRUCTOR
+  // ==========================================
 
   constructor() {
 
@@ -26,27 +58,82 @@ export class PrescriptionService {
 
   }
 
+
+  // ==========================================
+  // GET ALL PRESCRIPTIONS
+  // ==========================================
+
   loadPrescriptions(): void {
 
+    console.log(
+      '🔵 Loading all prescriptions...'
+    );
+
     this.http
-      .get<ApiResponse<Prescription[]>>(this.apiUrl)
+      .get<ApiResponse<Prescription[]>>(
+        this.apiUrl
+      )
       .subscribe({
 
         next: (response) => {
 
-          this.prescriptionsSubject.next(response.data);
+          console.log(
+            '✅ Prescription List Response:',
+            response
+          );
+
+          this.prescriptionsSubject.next(
+            response.data || []
+          );
 
         },
 
         error: (err) => {
 
-          console.error(err);
+          console.error(
+            '❌ Prescription List Error:',
+            err
+          );
 
         }
 
       });
 
   }
+
+
+  // ==========================================
+  // GET PRESCRIPTION BY ID
+  // ==========================================
+
+  getPrescriptionById(
+    id: number
+  ): Observable<ApiResponse<Prescription>> {
+
+    const url =
+      `${this.apiUrl}/${id}`;
+
+    console.log(
+      '🔎 Getting Prescription By ID:',
+      id
+    );
+
+    console.log(
+      '🌐 Calling API:',
+      url
+    );
+
+    return this.http
+      .get<ApiResponse<Prescription>>(
+        url
+      );
+
+  }
+
+
+  // ==========================================
+  // ADD PRESCRIPTION
+  // ==========================================
 
   addPrescription(
     prescription: Prescription
@@ -62,12 +149,16 @@ export class PrescriptionService {
         switchMap(response =>
 
           this.http
-            .get<ApiResponse<Prescription[]>>(this.apiUrl)
+            .get<ApiResponse<Prescription[]>>(
+              this.apiUrl
+            )
             .pipe(
 
               tap(result => {
 
-                this.prescriptionsSubject.next(result.data);
+                this.prescriptionsSubject.next(
+                  result.data || []
+                );
 
               }),
 
@@ -80,6 +171,11 @@ export class PrescriptionService {
       );
 
   }
+
+
+  // ==========================================
+  // UPDATE PRESCRIPTION
+  // ==========================================
 
   updatePrescription(
     id: number,
@@ -96,12 +192,16 @@ export class PrescriptionService {
         switchMap(response =>
 
           this.http
-            .get<ApiResponse<Prescription[]>>(this.apiUrl)
+            .get<ApiResponse<Prescription[]>>(
+              this.apiUrl
+            )
             .pipe(
 
               tap(result => {
 
-                this.prescriptionsSubject.next(result.data);
+                this.prescriptionsSubject.next(
+                  result.data || []
+                );
 
               }),
 
@@ -114,6 +214,11 @@ export class PrescriptionService {
       );
 
   }
+
+
+  // ==========================================
+  // DELETE PRESCRIPTION
+  // ==========================================
 
   deletePrescription(
     id: number
@@ -128,12 +233,16 @@ export class PrescriptionService {
         switchMap(response =>
 
           this.http
-            .get<ApiResponse<Prescription[]>>(this.apiUrl)
+            .get<ApiResponse<Prescription[]>>(
+              this.apiUrl
+            )
             .pipe(
 
               tap(result => {
 
-                this.prescriptionsSubject.next(result.data);
+                this.prescriptionsSubject.next(
+                  result.data || []
+                );
 
               }),
 
