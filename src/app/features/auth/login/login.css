@@ -1,167 +1,1738 @@
+/* =========================================================
+   HEALTHCARE MANAGEMENT SYSTEM
+   PREMIUM NIGHT HOSPITAL LOGIN
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+
+body {
+  font-family:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   MAIN LOGIN PAGE
+   ========================================================= */
+
 .login-page {
 
-    min-height: 100vh;
+  position: relative;
 
-    display: flex;
+  width: 100vw;
+  min-height: 100vh;
 
-    justify-content: center;
+  overflow: hidden;
 
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    background: #f4f6f9;
+  background-image:
+    url('/images/hospital-night.png');
 
-    padding: 20px;
+  background-size: cover;
+
+  background-position: center center;
+
+  background-repeat: no-repeat;
+
+  color: white;
+
+}
+
+
+/* =========================================================
+   DARK CINEMATIC OVERLAY
+   ========================================================= */
+
+.background-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(2, 18, 38, 0.78) 0%,
+      rgba(3, 25, 50, 0.60) 35%,
+      rgba(2, 16, 34, 0.38) 65%,
+      rgba(2, 12, 25, 0.55) 100%
+    );
 
 }
 
 
-.login-card {
+/* =========================================================
+   GLASS / RAIN ATMOSPHERE
+   ========================================================= */
 
-    width: 100%;
+.rain-glass {
 
-    max-width: 420px;
+  position: absolute;
 
-    background: #ffffff;
+  inset: 0;
 
-    padding: 35px;
+  z-index: 2;
 
-    border-radius: 10px;
+  pointer-events: none;
 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  background:
+
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(0, 157, 255, 0.13),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 80% 65%,
+      rgba(0, 190, 255, 0.10),
+      transparent 30%
+    );
 
 }
 
+
+/* =========================================================
+   TOP BRAND
+   ========================================================= */
+
+.top-brand {
+
+  position: absolute;
+
+  top: 30px;
+  left: 42px;
+
+  z-index: 10;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+}
+
+
+/* =========================================================
+   BRAND ICON
+   ========================================================= */
+
+.brand-icon {
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      #0b8cff,
+      #1764ed
+    );
+
+  box-shadow:
+
+    0 10px 30px
+    rgba(0, 126, 255, 0.40),
+
+    inset 0 1px 1px
+    rgba(255, 255, 255, 0.30);
+
+  font-size: 34px;
+
+  font-weight: 800;
+
+}
+
+
+/* =========================================================
+   BRAND TEXT
+   ========================================================= */
+
+.brand-title {
+
+  font-size: 22px;
+
+  font-weight: 800;
+
+  line-height: 1.05;
+
+  color: white;
+
+  letter-spacing: -0.5px;
+
+}
+
+
+.brand-subtitle {
+
+  font-size: 21px;
+
+  font-weight: 400;
+
+  line-height: 1.1;
+
+  color: rgba(255, 255, 255, 0.90);
+
+}
+
+
+.brand-tagline {
+
+  margin-top: 7px;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  color:
+
+    rgba(
+      190,
+      220,
+      245,
+      0.85
+    );
+
+}
+
+
+/* =========================================================
+   TOP RIGHT TAGLINE
+   ========================================================= */
+
+.top-tagline {
+
+  position: absolute;
+
+  top: 30px;
+  right: 55px;
+
+  z-index: 10;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  color:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.75
+    );
+
+}
+
+
+.top-tagline span {
+
+  margin: 0 9px;
+
+  color: #35b9ff;
+
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.login-content {
+
+  position: relative;
+
+  z-index: 5;
+
+  width: min(1120px, 90vw);
+
+  display: grid;
+
+  grid-template-columns:
+    1.05fr
+    0.95fr;
+
+  align-items: center;
+
+  gap: 70px;
+
+}
+
+
+/* =========================================================
+   LEFT HERO SECTION
+   ========================================================= */
+
+.hero-section {
+
+  padding-left: 25px;
+
+  max-width: 610px;
+
+}
+
+
+/* =========================================================
+   HERO BADGE
+   ========================================================= */
+
+.hero-badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding:
+    8px 15px;
+
+  margin-bottom: 27px;
+
+  border-radius: 30px;
+
+  border:
+
+    1px solid
+    rgba(
+      96,
+      206,
+      255,
+      0.48
+    );
+
+  background:
+
+    rgba(
+      20,
+      145,
+      220,
+      0.12
+    );
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+
+    0 0 20px
+    rgba(
+      0,
+      157,
+      255,
+      0.08
+    );
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  color: white;
+
+}
+
+
+/* =========================================================
+   BADGE DOT
+   ========================================================= */
+
+.badge-dot {
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #35c7ff;
+
+  box-shadow:
+
+    0 0 10px
+    #35c7ff;
+
+}
+
+
+/* =========================================================
+   HERO TITLE
+   ========================================================= */
+
+.hero-section h1 {
+
+  font-size: clamp(
+    58px,
+    5vw,
+    78px
+  );
+
+  line-height: 0.96;
+
+  font-weight: 900;
+
+  letter-spacing: -3px;
+
+  color: white;
+
+  margin-bottom: 30px;
+
+  text-shadow:
+
+    0 8px 30px
+    rgba(0, 0, 0, 0.25);
+
+}
+
+
+.hero-section h1 span {
+
+  color: #37adff;
+
+  text-shadow:
+
+    0 0 30px
+    rgba(
+      0,
+      157,
+      255,
+      0.20
+    );
+
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+   ========================================================= */
+
+.hero-description {
+
+  max-width: 590px;
+
+  font-size: 15px;
+
+  line-height: 1.75;
+
+  color:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.82
+    );
+
+  margin-bottom: 32px;
+
+}
+
+
+/* =========================================================
+   FEATURE LIST
+   ========================================================= */
+
+.feature-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+
+}
+
+
+/* =========================================================
+   FEATURE ITEM
+   ========================================================= */
+
+.feature-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+}
+
+
+/* =========================================================
+   FEATURE ICON
+   ========================================================= */
+
+.feature-icon {
+
+  width: 40px;
+  height: 40px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border:
+
+    1px solid
+    rgba(
+      48,
+      190,
+      255,
+      0.75
+    );
+
+  background:
+
+    rgba(
+      0,
+      145,
+      230,
+      0.16
+    );
+
+  color: #39baff;
+
+  box-shadow:
+
+    0 0 18px
+    rgba(
+      0,
+      160,
+      255,
+      0.18
+    );
+
+  font-size: 17px;
+
+}
+
+
+/* =========================================================
+   FEATURE TEXT
+   ========================================================= */
+
+.feature-content h3 {
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  color: white;
+
+  margin-bottom: 4px;
+
+}
+
+
+.feature-content p {
+
+  font-size: 10px;
+
+  color:
+
+    rgba(
+      210,
+      230,
+      245,
+      0.70
+    );
+
+}
+
+
+/* =========================================================
+   HERO FOOTER
+   ========================================================= */
+
+.hero-footer {
+
+  margin-top: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 4px;
+
+  color:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.60
+    );
+
+}
+
+
+.hero-footer span {
+
+  display: block;
+
+  width: 70px;
+  height: 2px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      #1db7ff,
+      transparent
+    );
+
+}
+
+
+.hero-footer b {
+
+  color: #28b8ff;
+
+}
+
+
+/* =========================================================
+   RIGHT GLASS LOGIN CARD
+   ========================================================= */
+
+.login-glass-card {
+
+  position: relative;
+
+  width: 100%;
+
+  max-width: 500px;
+
+  padding: 42px 48px 32px;
+
+  border-radius: 28px;
+
+  border:
+
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.38
+    );
+
+  background:
+
+    linear-gradient(
+      135deg,
+      rgba(
+        255,
+        255,
+        255,
+        0.18
+      ),
+      rgba(
+        255,
+        255,
+        255,
+        0.07
+      )
+    );
+
+  backdrop-filter:
+    blur(22px)
+    saturate(130%);
+
+  -webkit-backdrop-filter:
+    blur(22px)
+    saturate(130%);
+
+  box-shadow:
+
+    0 30px 80px
+    rgba(
+      0,
+      0,
+      0,
+      0.35
+    ),
+
+    inset 0 1px 1px
+    rgba(
+      255,
+      255,
+      255,
+      0.30
+    );
+
+}
+
+
+/* =========================================================
+   CARD TOP GLOW
+   ========================================================= */
+
+.login-glass-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 15%;
+
+  width: 70%;
+  height: 1px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(
+        255,
+        255,
+        255,
+        0.8
+      ),
+      transparent
+    );
+
+}
+
+
+/* =========================================================
+   LOGIN HEADER
+   ========================================================= */
 
 .login-header {
 
-    text-align: center;
+  text-align: center;
 
-    margin-bottom: 30px;
+  margin-bottom: 32px;
 
 }
 
 
+/* =========================================================
+   LOGIN ICON
+   ========================================================= */
+
+.login-icon {
+
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 18px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 17px;
+
+  background:
+
+    linear-gradient(
+      135deg,
+      #159fff,
+      #1764ed
+    );
+
+  box-shadow:
+
+    0 12px 30px
+    rgba(
+      0,
+      130,
+      255,
+      0.40
+    );
+
+}
+
+
+.login-icon span {
+
+  font-size: 27px;
+
+  color: white;
+
+}
+
+
+/* =========================================================
+   LOGIN TITLE
+   ========================================================= */
+
 .login-header h2 {
 
-    margin-bottom: 8px;
+  font-size: 29px;
 
-    font-size: 24px;
+  font-weight: 900;
 
-    font-weight: 600;
+  letter-spacing: -1px;
+
+  color: white;
+
+  margin-bottom: 7px;
 
 }
 
 
 .login-header p {
 
-    margin: 0;
+  font-size: 11px;
 
-    color: #6c757d;
+  color:
 
-    font-size: 14px;
+    rgba(
+      235,
+      245,
+      255,
+      0.68
+    );
 
 }
 
 
+/* =========================================================
+   LOGIN FORM
+   ========================================================= */
+
+.login-form {
+
+  width: 100%;
+
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
 .form-group {
 
-    margin-bottom: 20px;
+  margin-bottom: 19px;
 
 }
 
 
 .form-group label {
 
-    display: block;
+  display: block;
 
-    margin-bottom: 7px;
+  margin-bottom: 8px;
 
-    font-weight: 500;
+  font-size: 11px;
 
-    color: #333333;
+  font-weight: 700;
 
-}
+  color:
 
-
-.form-control {
-
-    width: 100%;
-
-    padding: 11px 12px;
-
-    border: 1px solid #ced4da;
-
-    border-radius: 6px;
-
-    font-size: 15px;
-
-    box-sizing: border-box;
-
-    outline: none;
+    rgba(
+      255,
+      255,
+      255,
+      0.90
+    );
 
 }
 
 
-.form-control:focus {
+/* =========================================================
+   INPUT WRAPPER
+   ========================================================= */
 
-    border-color: #0d6efd;
+.input-wrapper {
 
-    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.15);
+  position: relative;
+
+  width: 100%;
+
+}
+
+
+/* =========================================================
+   INPUT ICON
+   ========================================================= */
+
+.input-icon {
+
+  position: absolute;
+
+  left: 16px;
+
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  font-size: 15px;
+
+  opacity: 0.85;
+
+  z-index: 2;
 
 }
 
 
-.error-message {
+/* =========================================================
+   INPUT
+   ========================================================= */
 
-    margin-bottom: 15px;
+.input-wrapper input {
 
-    padding: 10px;
+  width: 100%;
 
-    border-radius: 5px;
+  height: 52px;
 
-    background: #f8d7da;
+  padding:
+    0 18px 0 46px;
 
-    color: #842029;
+  border-radius: 12px;
 
-    font-size: 14px;
+  border:
+
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.38
+    );
+
+  outline: none;
+
+  background:
+
+    rgba(
+      10,
+      25,
+      45,
+      0.22
+    );
+
+  color: white;
+
+  font-size: 12px;
+
+  transition:
+    all 0.25s ease;
+
+  backdrop-filter:
+    blur(10px);
+
+  -webkit-backdrop-filter:
+    blur(10px);
 
 }
 
+
+.input-wrapper input::placeholder {
+
+  color:
+
+    rgba(
+      235,
+      245,
+      255,
+      0.48
+    );
+
+}
+
+
+.input-wrapper input:focus {
+
+  border-color:
+    #26adff;
+
+  background:
+
+    rgba(
+      10,
+      35,
+      60,
+      0.36
+    );
+
+  box-shadow:
+
+    0 0 0 3px
+    rgba(
+      25,
+      166,
+      255,
+      0.13
+    ),
+
+    0 0 25px
+    rgba(
+      0,
+      157,
+      255,
+      0.12
+    );
+
+}
+
+
+/* =========================================================
+   FORM OPTIONS
+   ========================================================= */
+
+.form-options {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 3px;
+
+  margin-bottom: 23px;
+
+}
+
+
+/* =========================================================
+   REMEMBER ME
+   ========================================================= */
+
+.remember-me {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  font-size: 10px;
+
+  color:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.70
+    );
+
+}
+
+
+.remember-me input {
+
+  position: absolute;
+
+  opacity: 0;
+
+}
+
+
+.custom-checkbox {
+
+  width: 14px;
+  height: 14px;
+
+  border-radius: 3px;
+
+  border:
+
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.55
+    );
+
+  background:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.08
+    );
+
+}
+
+
+.remember-me input:checked
++ .custom-checkbox {
+
+  background: #159fff;
+
+  border-color: #159fff;
+
+  box-shadow:
+
+    0 0 10px
+    rgba(
+      21,
+      159,
+      255,
+      0.50
+    );
+
+}
+
+
+.remember-me input:checked
++ .custom-checkbox::after {
+
+  content: "✓";
+
+  display: block;
+
+  color: white;
+
+  font-size: 10px;
+
+  line-height: 12px;
+
+  text-align: center;
+
+}
+
+
+/* =========================================================
+   FORGOT PASSWORD
+   ========================================================= */
+
+.forgot-password {
+
+  border: none;
+
+  background: transparent;
+
+  color: #32b9ff;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  padding: 0;
+
+}
+
+
+.forgot-password:hover {
+
+  color: white;
+
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+   ========================================================= */
 
 .login-button {
 
-    width: 100%;
+  width: 100%;
 
-    padding: 11px;
+  height: 54px;
 
-    border: none;
+  border: none;
 
-    border-radius: 6px;
+  border-radius: 12px;
 
-    background: #0d6efd;
+  cursor: pointer;
 
-    color: #ffffff;
+  display: flex;
 
-    font-size: 16px;
+  align-items: center;
 
-    font-weight: 500;
+  justify-content: center;
 
-    cursor: pointer;
+  gap: 10px;
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  background:
+
+    linear-gradient(
+      100deg,
+      #11a6ff,
+      #155cff
+    );
+
+  box-shadow:
+
+    0 12px 30px
+    rgba(
+      0,
+      100,
+      255,
+      0.30
+    );
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
 }
 
 
 .login-button:hover {
 
-    background: #0b5ed7;
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+
+    0 17px 38px
+    rgba(
+      0,
+      120,
+      255,
+      0.42
+    );
 
 }
 
 
-.login-button:disabled {
+.login-button:active {
 
-    background: #6c757d;
+  transform:
+    translateY(0);
 
-    cursor: not-allowed;
+}
+
+
+.login-button .arrow {
+
+  font-size: 19px;
+
+  font-weight: 400;
+
+}
+
+
+/* =========================================================
+   SECURITY BOX
+   ========================================================= */
+
+.security-box {
+
+  margin-top: 22px;
+
+  padding: 13px 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  border-radius: 12px;
+
+  border:
+
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.25
+    );
+
+  background:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.08
+    );
+
+  backdrop-filter:
+    blur(10px);
+
+  -webkit-backdrop-filter:
+    blur(10px);
+
+}
+
+
+/* =========================================================
+   SECURITY ICON
+   ========================================================= */
+
+.security-icon {
+
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.18
+    );
+
+  font-size: 16px;
+
+}
+
+
+/* =========================================================
+   SECURITY CONTENT
+   ========================================================= */
+
+.security-content {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+}
+
+
+.security-content strong {
+
+  font-size: 10px;
+
+  color: white;
+
+}
+
+
+.security-content span {
+
+  font-size: 8px;
+
+  color:
+
+    rgba(
+      230,
+      240,
+      250,
+      0.62
+    );
+
+}
+
+
+/* =========================================================
+   CARD FOOTER
+   ========================================================= */
+
+.card-footer {
+
+  margin-top: 24px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  color:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.45
+    );
+
+}
+
+
+.card-footer span {
+
+  width: 55px;
+
+  height: 1px;
+
+  background:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.25
+    );
+
+}
+
+
+/* =========================================================
+   SYSTEM STATUS
+   ========================================================= */
+
+.system-status {
+
+  position: absolute;
+
+  right: 35px;
+  bottom: 22px;
+
+  z-index: 10;
+
+  display: flex;
+
+  gap: 8px;
+
+  align-items: center;
+
+  padding:
+    9px 14px;
+
+  border-radius: 30px;
+
+  border:
+
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.22
+    );
+
+  background:
+
+    rgba(
+      10,
+      20,
+      35,
+      0.35
+    );
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
+  color:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+
+  font-size: 8px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .login-content {
+
+    width: 92vw;
+
+    gap: 40px;
+
+  }
+
+
+  .hero-section h1 {
+
+    font-size: 55px;
+
+  }
+
+
+  .login-glass-card {
+
+    padding:
+      35px 38px 28px;
+
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .login-page {
+
+    min-height: 100vh;
+
+    padding:
+      100px 20px 40px;
+
+    overflow-y: auto;
+
+    align-items: flex-start;
+
+  }
+
+
+  .top-brand {
+
+    top: 20px;
+    left: 20px;
+
+  }
+
+
+  .brand-icon {
+
+    width: 45px;
+    height: 45px;
+
+    font-size: 25px;
+
+  }
+
+
+  .brand-title {
+
+    font-size: 16px;
+
+  }
+
+
+  .brand-subtitle {
+
+    font-size: 15px;
+
+  }
+
+
+  .brand-tagline {
+
+    display: none;
+
+  }
+
+
+  .top-tagline {
+
+    display: none;
+
+  }
+
+
+  .login-content {
+
+    width: 100%;
+
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+
+  }
+
+
+  .hero-section {
+
+    padding: 0;
+
+    max-width: 100%;
+
+  }
+
+
+  .hero-section h1 {
+
+    font-size: 48px;
+
+    letter-spacing: -2px;
+
+  }
+
+
+  .hero-description {
+
+    font-size: 13px;
+
+  }
+
+
+  .feature-list {
+
+    gap: 15px;
+
+  }
+
+
+  .hero-footer {
+
+    margin-top: 25px;
+
+  }
+
+
+  .login-glass-card {
+
+    max-width: 100%;
+
+    padding:
+      32px 25px 25px;
+
+  }
+
+
+  .system-status {
+
+    display: none;
+
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .login-page {
+
+    padding-top: 85px;
+
+  }
+
+
+  .hero-section h1 {
+
+    font-size: 39px;
+
+  }
+
+
+  .hero-badge {
+
+    font-size: 8px;
+
+  }
+
+
+  .hero-description {
+
+    line-height: 1.6;
+
+  }
+
+
+  .feature-content h3 {
+
+    font-size: 12px;
+
+  }
+
+
+  .feature-content p {
+
+    font-size: 9px;
+
+  }
+
+
+  .login-header h2 {
+
+    font-size: 25px;
+
+  }
+
+
+  .login-glass-card {
+
+    border-radius: 22px;
+
+  }
 
 }

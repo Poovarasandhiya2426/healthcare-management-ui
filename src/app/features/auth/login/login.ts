@@ -25,6 +25,8 @@ export class LoginComponent {
 
   isLoading = false;
 
+  rememberMe: boolean = false;
+
   constructor(
     private authService: AuthService,
     private router: Router

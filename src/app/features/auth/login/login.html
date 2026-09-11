@@ -1,82 +1,453 @@
 <div class="login-page">
 
-    <div class="login-card">
+  <!-- ========================================= -->
+  <!-- BACKGROUND -->
+  <!-- ========================================= -->
 
-        <div class="login-header">
+  <div class="background-overlay"></div>
 
-            <h2>Healthcare Management System</h2>
+  <div class="rain-glass"></div>
 
-            <p>Login to your account</p>
+
+  <!-- ========================================= -->
+  <!-- TOP BRAND -->
+  <!-- ========================================= -->
+
+  <div class="top-brand">
+
+    <div class="brand-icon">
+      ✚
+    </div>
+
+    <div class="brand-text">
+
+      <div class="brand-title">
+        Healthcare
+      </div>
+
+      <div class="brand-subtitle">
+        Management System
+      </div>
+
+      <div class="brand-tagline">
+        SMART • SECURE • CONNECTED
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================= -->
+  <!-- TOP RIGHT TAGLINE -->
+  <!-- ========================================= -->
+
+  <div class="top-tagline">
+
+    CARE TODAY
+    <span>•</span>
+    HEALTHIER TOMORROW
+
+  </div>
+
+
+  <!-- ========================================= -->
+  <!-- MAIN CONTENT -->
+  <!-- ========================================= -->
+
+  <div class="login-content">
+
+
+    <!-- ======================================= -->
+    <!-- LEFT CONTENT -->
+    <!-- ======================================= -->
+
+    <section class="hero-section">
+
+
+      <!-- BADGE -->
+
+      <div class="hero-badge">
+
+        <span class="badge-dot"></span>
+
+        TRUSTED HEALTHCARE PLATFORM
+
+      </div>
+
+
+      <!-- MAIN HEADING -->
+
+      <h1>
+
+        Better Care.
+        <br>
+
+        <span>
+          Better
+        </span>
+
+        <br>
+
+        <span>
+          Management.
+        </span>
+
+      </h1>
+
+
+      <!-- DESCRIPTION -->
+
+      <p class="hero-description">
+
+        A secure and centralized healthcare management platform
+        designed to simplify hospital operations, improve patient care
+        and connect healthcare teams.
+
+      </p>
+
+
+      <!-- ===================================== -->
+      <!-- FEATURES -->
+      <!-- ===================================== -->
+
+      <div class="feature-list">
+
+
+        <!-- FEATURE 1 -->
+
+        <div class="feature-item">
+
+          <div class="feature-icon">
+            👥
+          </div>
+
+          <div class="feature-content">
+
+            <h3>
+              Secure Healthcare Management
+            </h3>
+
+            <p>
+              Manage healthcare information securely
+            </p>
+
+          </div>
 
         </div>
 
 
-        <form (ngSubmit)="login()">
+        <!-- FEATURE 2 -->
 
-            <!-- Username -->
+        <div class="feature-item">
 
-            <div class="form-group">
+          <div class="feature-icon">
+            ▣
+          </div>
 
-                <label for="username">
-                    Username
-                </label>
+          <div class="feature-content">
 
-                <input
-                    id="username"
-                    type="text"
-                    class="form-control"
-                    name="username"
-                    [(ngModel)]="username"
-                    placeholder="Enter username"
-                    autocomplete="username">
+            <h3>
+              Centralized Patient Records
+            </h3>
 
-            </div>
+            <p>
+              Access patient information efficiently
+            </p>
 
+          </div>
 
-            <!-- Password -->
-
-            <div class="form-group">
-
-                <label for="password">
-                    Password
-                </label>
-
-                <input
-                    id="password"
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    [(ngModel)]="password"
-                    placeholder="Enter password"
-                    autocomplete="current-password">
-
-            </div>
+        </div>
 
 
-            <!-- Error Message -->
+        <!-- FEATURE 3 -->
 
-            <div
-                *ngIf="errorMessage"
-                class="error-message">
+        <div class="feature-item">
 
-                {{ errorMessage }}
+          <div class="feature-icon">
+            🛡
+          </div>
 
-            </div>
+          <div class="feature-content">
+
+            <h3>
+              Complete Hospital Operations
+            </h3>
+
+            <p>
+              Manage doctors, appointments and prescriptions
+            </p>
+
+          </div>
+
+        </div>
 
 
-            <!-- Login Button -->
+      </div>
 
-            <button
-                type="submit"
-                class="login-button"
-                [disabled]="isLoading">
 
-                {{ isLoading ? 'Logging in...' : 'Login' }}
+      <!-- ===================================== -->
+      <!-- BOTTOM HERO TEXT -->
+      <!-- ===================================== -->
 
-            </button>
+      <div class="hero-footer">
 
-        </form>
+        <span></span>
 
-    </div>
+        CARE TODAY
+
+        <b>•</b>
+
+        HEALTHIER TOMORROW
+
+      </div>
+
+
+    </section>
+
+
+    <!-- ======================================= -->
+    <!-- RIGHT LOGIN GLASS CARD -->
+    <!-- ======================================= -->
+
+    <section class="login-glass-card">
+
+
+      <!-- ===================================== -->
+      <!-- LOGIN HEADER -->
+      <!-- ===================================== -->
+
+      <div class="login-header">
+
+
+        <div class="login-icon">
+
+          <span>
+            ♥
+          </span>
+
+        </div>
+
+
+        <h2>
+          Welcome Back
+        </h2>
+
+
+        <p>
+          Sign in to continue to your healthcare dashboard
+        </p>
+
+
+      </div>
+
+
+      <!-- ===================================== -->
+      <!-- LOGIN FORM -->
+      <!-- ===================================== -->
+
+      <form
+        class="login-form"
+        (ngSubmit)="login()"
+      >
+
+
+        <!-- USERNAME -->
+
+        <div class="form-group">
+
+          <label for="username">
+            Username
+          </label>
+
+
+          <div class="input-wrapper">
+
+            <span class="input-icon">
+              👤
+            </span>
+
+
+            <input
+              id="username"
+              type="text"
+              name="username"
+              [(ngModel)]="username"
+              placeholder="Enter username"
+              autocomplete="username"
+              required
+            />
+
+          </div>
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+          <label for="password">
+            Password
+          </label>
+
+
+          <div class="input-wrapper">
+
+            <span class="input-icon">
+              🔒
+            </span>
+
+
+            <input
+              id="password"
+              type="password"
+              name="password"
+              [(ngModel)]="password"
+              placeholder="Enter password"
+              autocomplete="current-password"
+              required
+            />
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================== -->
+        <!-- REMEMBER / FORGOT -->
+        <!-- =================================== -->
+
+        <div class="form-options">
+
+
+          <label class="remember-me">
+
+            <input
+              type="checkbox"
+              name="rememberMe"
+              [(ngModel)]="rememberMe"
+            />
+
+            <span class="custom-checkbox"></span>
+
+            <span>
+              Remember me
+            </span>
+
+          </label>
+
+
+          <button
+            type="button"
+            class="forgot-password"
+          >
+            Forgot password?
+          </button>
+
+
+        </div>
+
+
+        <!-- =================================== -->
+        <!-- LOGIN BUTTON -->
+        <!-- =================================== -->
+
+        <button
+          type="submit"
+          class="login-button"
+        >
+
+          <span class="arrow">
+            →
+          </span>
+
+          <span>
+            Login
+          </span>
+
+        </button>
+
+
+      </form>
+
+
+      <!-- ===================================== -->
+      <!-- SECURITY BOX -->
+      <!-- ===================================== -->
+
+      <div class="security-box">
+
+
+        <div class="security-icon">
+          🔐
+        </div>
+
+
+        <div class="security-content">
+
+          <strong>
+            Secure Login
+          </strong>
+
+          <span>
+            Your healthcare information is protected
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- ===================================== -->
+      <!-- CARD FOOTER -->
+      <!-- ===================================== -->
+
+      <div class="card-footer">
+
+        <span></span>
+
+        HEALTHCARE MANAGEMENT SYSTEM
+
+        <span></span>
+
+      </div>
+
+
+    </section>
+
+
+  </div>
+
+
+  <!-- ========================================= -->
+  <!-- BOTTOM RIGHT STATUS -->
+  <!-- ========================================= -->
+
+  <div class="system-status">
+
+    <span>
+      ◉ Secure
+    </span>
+
+    <span>
+      |
+    </span>
+
+    <span>
+      Reliable
+    </span>
+
+    <span>
+      |
+    </span>
+
+    <span>
+      Efficient
+    </span>
+
+  </div>
+
 
 </div>
